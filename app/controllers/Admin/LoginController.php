@@ -9,7 +9,7 @@ class LoginController extends Controller
 
     public function loginAction()
     {
-
+        return static::success();
     }
 
 }

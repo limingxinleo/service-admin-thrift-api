@@ -8,20 +8,15 @@
 // +----------------------------------------------------------------------
 namespace App\Controllers;
 
+use App\Common\Enums\ErrorCode;
 use App\Logics\System;
+use App\Utils\Response;
 
 class IndexController extends Controller
 {
-    /**
-     * @desc
-     * @author limx
-     * @return bool|\Phalcon\Mvc\View
-     * @Middleware('auth')
-     */
+
     public function indexAction()
     {
-        $this->view->version = (new System())->version();
-        return $this->view->render('index', 'index');
+        return Response::fail(ErrorCode::$ENUM_SYSTEM_ERROR);
     }
-    
 }
