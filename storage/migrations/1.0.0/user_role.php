@@ -22,29 +22,31 @@ class UserRoleMigration_100 extends Migration
                     new Column(
                         'id',
                         [
-                            'type' => Column::TYPE_BIGINTEGER,
+                            'type' => Column::TYPE_INTEGER,
                             'unsigned' => true,
                             'notNull' => true,
                             'autoIncrement' => true,
-                            'size' => 20,
+                            'size' => 11,
                             'first' => true
                         ]
                     ),
                     new Column(
                         'user_id',
                         [
-                            'type' => Column::TYPE_BIGINTEGER,
+                            'type' => Column::TYPE_INTEGER,
+                            'unsigned' => true,
                             'notNull' => true,
-                            'size' => 20,
+                            'size' => 11,
                             'after' => 'id'
                         ]
                     ),
                     new Column(
                         'role_id',
                         [
-                            'type' => Column::TYPE_BIGINTEGER,
+                            'type' => Column::TYPE_INTEGER,
+                            'unsigned' => true,
                             'notNull' => true,
-                            'size' => 20,
+                            'size' => 11,
                             'after' => 'user_id'
                         ]
                     ),

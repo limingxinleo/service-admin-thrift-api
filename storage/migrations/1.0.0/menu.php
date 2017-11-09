@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class UserMigration_100
+ * Class MenuMigration_100
  */
-class UserMigration_100 extends Migration
+class MenuMigration_100 extends Migration
 {
     /**
      * Define the table structure
@@ -17,7 +17,7 @@ class UserMigration_100 extends Migration
      */
     public function morph()
     {
-        $this->morphTable('user', [
+        $this->morphTable('menu', [
                 'columns' => [
                     new Column(
                         'id',
@@ -31,53 +31,32 @@ class UserMigration_100 extends Migration
                         ]
                     ),
                     new Column(
-                        'username',
+                        'pid',
                         [
-                            'type' => Column::TYPE_VARCHAR,
-                            'default' => "",
+                            'type' => Column::TYPE_INTEGER,
+                            'unsigned' => true,
                             'notNull' => true,
-                            'size' => 64,
+                            'size' => 11,
                             'after' => 'id'
                         ]
                     ),
                     new Column(
-                        'password',
+                        'name',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'notNull' => true,
+                            'size' => 32,
+                            'after' => 'pid'
+                        ]
+                    ),
+                    new Column(
+                        'route',
                         [
                             'type' => Column::TYPE_VARCHAR,
                             'default' => "",
                             'notNull' => true,
                             'size' => 64,
-                            'after' => 'username'
-                        ]
-                    ),
-                    new Column(
-                        'nickname',
-                        [
-                            'type' => Column::TYPE_VARCHAR,
-                            'default' => "",
-                            'notNull' => true,
-                            'size' => 32,
-                            'after' => 'password'
-                        ]
-                    ),
-                    new Column(
-                        'email',
-                        [
-                            'type' => Column::TYPE_VARCHAR,
-                            'default' => "",
-                            'notNull' => true,
-                            'size' => 64,
-                            'after' => 'nickname'
-                        ]
-                    ),
-                    new Column(
-                        'mobile',
-                        [
-                            'type' => Column::TYPE_VARCHAR,
-                            'default' => "",
-                            'notNull' => true,
-                            'size' => 32,
-                            'after' => 'email'
+                            'after' => 'name'
                         ]
                     ),
                     new Column(
@@ -85,7 +64,7 @@ class UserMigration_100 extends Migration
                         [
                             'type' => Column::TYPE_DATETIME,
                             'size' => 1,
-                            'after' => 'mobile'
+                            'after' => 'route'
                         ]
                     ),
                     new Column(
@@ -98,8 +77,7 @@ class UserMigration_100 extends Migration
                     )
                 ],
                 'indexes' => [
-                    new Index('PRIMARY', ['id'], 'PRIMARY'),
-                    new Index('USERNAME_UNIQUE', ['username'], 'UNIQUE')
+                    new Index('PRIMARY', ['id'], 'PRIMARY')
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
