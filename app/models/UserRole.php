@@ -10,21 +10,21 @@ class UserRole extends Model
      * @var integer
      * @Primary
      * @Identity
-     * @Column(type="integer", length=20, nullable=false)
+     * @Column(type="integer", length=11, nullable=false)
      */
     public $id;
 
     /**
      *
      * @var integer
-     * @Column(type="integer", length=20, nullable=false)
+     * @Column(type="integer", length=11, nullable=false)
      */
     public $user_id;
 
     /**
      *
      * @var integer
-     * @Column(type="integer", length=20, nullable=false)
+     * @Column(type="integer", length=11, nullable=false)
      */
     public $role_id;
 
@@ -52,16 +52,6 @@ class UserRole extends Model
     }
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'user_role';
-    }
-
-    /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
@@ -81,6 +71,16 @@ class UserRole extends Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * Returns table name mapped in the model.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return 'user_role';
     }
 
 }

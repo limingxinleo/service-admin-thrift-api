@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Role extends Model
+class RoleMenu extends Model
 {
 
     /**
@@ -16,17 +16,17 @@ class Role extends Model
 
     /**
      *
-     * @var string
-     * @Column(type="string", length=32, nullable=false)
+     * @var integer
+     * @Column(type="integer", length=11, nullable=false)
      */
-    public $role_name;
+    public $role_id;
 
     /**
      *
-     * @var string
-     * @Column(type="string", length=1000, nullable=false)
+     * @var integer
+     * @Column(type="integer", length=11, nullable=false)
      */
-    public $role_desc;
+    public $menu_id;
 
     /**
      *
@@ -48,14 +48,24 @@ class Role extends Model
     public function initialize()
     {
         $this->setSchema("admin");
-        $this->setSource("role");
+        $this->setSource("role_menu");
+    }
+
+    /**
+     * Returns table name mapped in the model.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return 'role_menu';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Role[]|Role|\Phalcon\Mvc\Model\ResultSetInterface
+     * @return RoleMenu[]|RoleMenu|\Phalcon\Mvc\Model\ResultSetInterface
      */
     public static function find($parameters = null)
     {
@@ -66,21 +76,11 @@ class Role extends Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Role|\Phalcon\Mvc\Model\ResultInterface
+     * @return RoleMenu|\Phalcon\Mvc\Model\ResultInterface
      */
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
-    }
-
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'role';
     }
 
 }
