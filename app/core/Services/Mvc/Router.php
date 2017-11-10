@@ -19,8 +19,8 @@ class Router implements ServiceProviderInterface
     public function register(FactoryDefault $di, Config $config)
     {
         $di->setShared('router', function () use ($config) {
-            $router = new MvcRouter(false);
-            // $router = new XMvcRouter(false);
+            // $router = new MvcRouter(false);
+            $router = new XMvcRouter(false);
             $dir = $config->application->configDir . 'routes';
             foreach (glob($dir . '/*.php') as $item) {
                 include_once $item;

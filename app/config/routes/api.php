@@ -9,15 +9,18 @@
 use Phalcon\Mvc\Router\Group as RouterGroup;
 
 // Create a group with a common module and controller
-$api = new RouterGroup();
+$router->group(function () {
+    $api = new RouterGroup();
 
-// All the routes start with /api
-$api->setPrefix('/api');
+    // All the routes start with /api
+    $api->setPrefix('/api');
 
-// 管理员登录
-$api->add('/user/login', 'App\\Controllers\\Admin\\Login::login');
+    // 管理员登录
+    $api->add('/user/login', 'App\\Controllers\\Admin\\Login::login');
 
-// 管理员基本信息
-$api->add('/user/info', 'App\\Controllers\\Admin\\User::info');
+    // 管理员基本信息
+    $api->add('/user/info', 'App\\Controllers\\Admin\\User::info');
 
-$router->mount($api);
+
+    return $api;
+});
