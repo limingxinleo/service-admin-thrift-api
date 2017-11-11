@@ -12,6 +12,7 @@ use App\Biz\Base;
 use App\Biz\BizException;
 use App\Common\Enums\ErrorCode;
 use App\Models\User as UserModel;
+use App\Utils\Redis;
 use Phalcon\Text;
 
 class User extends Base
@@ -37,7 +38,7 @@ class User extends Base
         $this->user = $user;
         $this->token = Text::random(16);
 
-        // $this->setUserCache()
+        $this->setUserCache();
 
     }
 
@@ -47,7 +48,7 @@ class User extends Base
             throw new BizException('授权信息保存失败', ErrorCode::$ENUM_SYSTEM_ERROR);
         }
 
-
+        return Redis::set($this->token, serialize($this->user), 3600);
     }
 
     public function getUserCache($token)
