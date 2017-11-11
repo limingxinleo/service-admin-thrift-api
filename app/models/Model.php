@@ -51,11 +51,14 @@ abstract class Model extends \Phalcon\Mvc\Model
     public function beforeCreate()
     {
         // 数据创建之前
+        $this->created_at = date('Y-m-d');
+        $this->updated_at = date('Y-m-d');
     }
 
     public function beforeUpdate()
     {
         // 数据更新之前
+        $this->updated_at = date('Y-m-d');
     }
 
     public function afterSave()

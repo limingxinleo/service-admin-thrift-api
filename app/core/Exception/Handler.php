@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Core\Exception;
 
+use App\Utils\Response;
 use Exception;
 use ErrorException;
 use Phalcon\DI\FactoryDefault;
@@ -45,9 +46,9 @@ class Handler
         $msg = $ex->getMessage() . " in " . $ex->getFile() . ' line ' . $ex->getLine() . PHP_EOL . $ex->getTraceAsString();
         $this->logger->error($msg);
         if (env('APP_DEBUG', false)) {
-            echo $msg;
+            echo Response::fail($ex->getCode(), $ex->getMessage())->getContent();
         } else {
-            echo 'Sorry, 服务器内部错误';
+            echo Response::fail($ex->getCode())->getContent();
         }
         exit(255);
     }

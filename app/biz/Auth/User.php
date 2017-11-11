@@ -9,8 +9,50 @@
 namespace App\Biz\Auth;
 
 use App\Biz\Base;
+use App\Biz\BizException;
+use App\Common\Enums\ErrorCode;
+use App\Models\User as UserModel;
+use Phalcon\Text;
 
 class User extends Base
 {
-    
+    public $user;
+
+    public $token;
+
+    public function login($usernmae, $password)
+    {
+        $user = UserModel::findFirst([
+            'conditions' => 'username = ?0',
+            'bind' => [$usernmae]
+        ]);
+        if (empty($user)) {
+            return false;
+        }
+
+        if ($user->password !== password($password)) {
+            return false;
+        }
+
+        $this->user = $user;
+        $this->token = Text::random(16);
+
+        // $this->setUserCache()
+
+    }
+
+    protected function setUserCache()
+    {
+        if (empty($this->token) || empty($this->user)) {
+            throw new BizException('授权信息保存失败', ErrorCode::$ENUM_SYSTEM_ERROR);
+        }
+
+
+    }
+
+    public function getUserCache($token)
+    {
+
+    }
+
 }

@@ -9,7 +9,6 @@
 namespace App\Controllers;
 
 use App\Common\Enums\ErrorCode;
-use App\Logics\System;
 use App\Utils\Response;
 
 class IndexController extends Controller
