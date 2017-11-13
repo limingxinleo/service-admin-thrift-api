@@ -51,9 +51,23 @@ class User extends Base
         return Redis::set($this->token, serialize($this->user), 3600);
     }
 
+    /**
+     * @desc
+     * @author limx
+     * @param $token
+     * @return mixed
+     */
     public function getUserCache($token)
     {
+        $res = Redis::get($token);
+        if ($res && $user = unserialize($res)) {
+            if ($user instanceof UserModel) {
+                Redis::expire($token, 3600);
+                return $user;
+            }
+        }
 
+        throw new BizException('TOKEN已超时', ErrorCode::$ENUM_TOKEN_TIMEOUT);
     }
 
 }
