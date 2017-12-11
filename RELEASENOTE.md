@@ -5,10 +5,31 @@
 - [ ] php单元测试
 
 ### Added
+
+### Changed
+* 修改mkdir为File::makeDirectory方法
+
+### Fixed
+* 修改InstanceBase getInstance不能返回一个实例的BUG
+* 修改当并发新建日志目录时，如果已存在目录，则不抛出错误
+
+### Deleted
+* 删除Logic目录
+
+## [2.0.7]
+### Checked
+- [x] php单元测试
+
+### Added
 * 增加路由group方法
+* 增加系统环境变量
+* 增加单例基类
 
 ### Changed
 * 不使用系统方法 system删除缓存
+* 完善消息队列失败时逻辑处理
+* 修改异常捕获时，错误信息的格式
+* 修改缓存基类位置
 
 ### Fixed
 

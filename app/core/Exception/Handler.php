@@ -43,7 +43,7 @@ class Handler
      */
     public function render(Exception $ex)
     {
-        $msg = $ex->getMessage() . " in " . $ex->getFile() . ' line ' . $ex->getLine() . PHP_EOL . $ex->getTraceAsString();
+        $msg = $ex->getMessage() . ' code:' . $ex->getCode() . ' in ' . $ex->getFile() . ' line ' . $ex->getLine() . PHP_EOL . $ex->getTraceAsString();
         $this->logger->error($msg);
         if (env('APP_DEBUG', false)) {
             echo Response::fail($ex->getCode(), $ex->getMessage())->getContent();
@@ -60,7 +60,7 @@ class Handler
      */
     public function renderForConsole(Exception $ex)
     {
-        $msg = $ex->getMessage() . " in " . $ex->getFile() . ' line ' . $ex->getLine() . PHP_EOL . $ex->getTraceAsString();
+        $msg = $ex->getMessage() . ' code:' . $ex->getCode() . ' in ' . $ex->getFile() . ' line ' . $ex->getLine() . PHP_EOL . $ex->getTraceAsString();
         $this->logger->error($msg);
         echo $msg;
         exit(255);

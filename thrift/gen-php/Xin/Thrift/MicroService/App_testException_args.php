@@ -16,7 +16,7 @@ use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
 
-class App_version_args {
+class App_testException_args {
   static $isValidate = false;
 
   static $_TSPEC = array(
@@ -27,7 +27,7 @@ class App_version_args {
   }
 
   public function getName() {
-    return 'App_version_args';
+    return 'App_testException_args';
   }
 
   public function read($input)
@@ -57,7 +57,7 @@ class App_version_args {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('App_version_args');
+    $xfer += $output->writeStructBegin('App_testException_args');
     $xfer += $output->writeFieldStop();
     $xfer += $output->writeStructEnd();
     return $xfer;
