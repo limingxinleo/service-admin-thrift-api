@@ -12,11 +12,18 @@ use App\Common\Enums\ErrorCode;
 
 class Response
 {
-    public static function success($data)
+    private static function response(array $data)
     {
         /** @var \Phalcon\Http\Response $response */
         $response = di('response');
-        return $response->setJsonContent([
+        return $response
+            ->setHeader('Access-Control-Allow-Origin', '*')
+            ->setJsonContent($data);
+    }
+
+    public static function success($data)
+    {
+        return static::response([
             'code' => 0,
             'data' => $data
         ]);
@@ -24,15 +31,13 @@ class Response
 
     public static function fail($code, $message = null)
     {
-        /** @var \Phalcon\Http\Response $response */
-        $response = di('response');
         // 避免出现第三方插件有错误码为0的情况
         if ($code === 0) $code = ErrorCode::$ENUM_SYSTEM_ERROR;
         if (empty($message)) {
             $message = ErrorCode::getMessage($code);
         }
 
-        return $response->setJsonContent([
+        return static::response([
             'code' => $code,
             'message' => $message
         ]);
