@@ -27,4 +27,14 @@ class ErrorCode extends Enum
      * @Message('TOKEN已超时')
      */
     public static $ENUM_TOKEN_TIMEOUT = 701;
+
+    /**
+     * @Message('超级管理员已存在')
+     */
+    public static $ENUM_SUPER_ADMIN_EXIST = 1000;
+
+    /**
+     * @Message('超级管理员不允许删除')
+     */
+    public static $ENUM_SUPER_ADMIN_SHOULD_NOT_DELETE = 1001;
 }

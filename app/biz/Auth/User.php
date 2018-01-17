@@ -21,6 +21,13 @@ class User extends Base
 
     public $token;
 
+    /**
+     * @desc   管理员登录接口
+     * @author limx
+     * @param $usernmae 用户名
+     * @param $password 密码
+     * @return bool
+     */
     public function login($usernmae, $password)
     {
         $user = UserModel::findFirst([

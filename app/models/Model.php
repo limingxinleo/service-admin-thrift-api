@@ -22,6 +22,17 @@ abstract class Model extends BaseModel
         $this->useDynamicUpdate(true);
     }
 
+    public function beforeCreate()
+    {
+        $this->created_at = date('Y-m-d H:i:s');
+        $this->updated_at = date('Y-m-d H:i:s');
+    }
+
+    public function beforeUpdate()
+    {
+        $this->updated_at = date('Y-m-d H:i:s');
+    }
+
     /**
      * @desc   验证失败之后的事件
      * @author limx
