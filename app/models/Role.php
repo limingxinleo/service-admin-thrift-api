@@ -10,35 +10,35 @@ class Role extends Model
      * @var integer
      * @Primary
      * @Identity
-     * @Column(type="integer", length=11, nullable=false)
+     * @Column(column="id", type="integer", length=11, nullable=false)
      */
     public $id;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=32, nullable=false)
+     * @Column(column="role_name", type="string", length=32, nullable=false)
      */
     public $role_name;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=1000, nullable=false)
+     * @Column(column="role_desc", type="string", length=1000, nullable=false)
      */
     public $role_desc;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(column="created_at", type="string", nullable=true)
      */
     public $created_at;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(column="updated_at", type="string", nullable=true)
      */
     public $updated_at;
 
@@ -49,6 +49,7 @@ class Role extends Model
     {
         $this->setSchema("admin");
         $this->setSource("role");
+        parent::initialize();
     }
 
     /**

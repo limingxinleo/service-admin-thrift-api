@@ -19,7 +19,7 @@ abstract class Model extends BaseModel
     public function initialize()
     {
         // Sets if a model must use dynamic update instead of the all-field update
-        // $this->useDynamicUpdate(true);
+        $this->useDynamicUpdate(true);
     }
 
     /**

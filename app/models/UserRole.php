@@ -10,35 +10,35 @@ class UserRole extends Model
      * @var integer
      * @Primary
      * @Identity
-     * @Column(type="integer", length=11, nullable=false)
+     * @Column(column="id", type="integer", length=11, nullable=false)
      */
     public $id;
 
     /**
      *
      * @var integer
-     * @Column(type="integer", length=11, nullable=false)
+     * @Column(column="user_id", type="integer", length=11, nullable=false)
      */
     public $user_id;
 
     /**
      *
      * @var integer
-     * @Column(type="integer", length=11, nullable=false)
+     * @Column(column="role_id", type="integer", length=11, nullable=false)
      */
     public $role_id;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(column="created_at", type="string", nullable=true)
      */
     public $created_at;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(column="updated_at", type="string", nullable=true)
      */
     public $updated_at;
 
@@ -49,6 +49,7 @@ class UserRole extends Model
     {
         $this->setSchema("admin");
         $this->setSource("user_role");
+        parent::initialize();
     }
 
     /**

@@ -10,42 +10,42 @@ class Menu extends Model
      * @var integer
      * @Primary
      * @Identity
-     * @Column(type="integer", length=11, nullable=false)
+     * @Column(column="id", type="integer", length=11, nullable=false)
      */
     public $id;
 
     /**
      *
      * @var integer
-     * @Column(type="integer", length=11, nullable=false)
+     * @Column(column="pid", type="integer", length=11, nullable=false)
      */
     public $pid;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=32, nullable=false)
+     * @Column(column="name", type="string", length=32, nullable=false)
      */
     public $name;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=64, nullable=false)
+     * @Column(column="route", type="string", length=64, nullable=false)
      */
     public $route;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(column="created_at", type="string", nullable=true)
      */
     public $created_at;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(column="updated_at", type="string", nullable=true)
      */
     public $updated_at;
 
@@ -56,16 +56,7 @@ class Menu extends Model
     {
         $this->setSchema("admin");
         $this->setSource("menu");
-    }
-
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'menu';
+        parent::initialize();
     }
 
     /**
@@ -88,5 +79,15 @@ class Menu extends Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * Returns table name mapped in the model.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return 'menu';
     }
 }

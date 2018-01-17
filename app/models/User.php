@@ -13,56 +13,56 @@ class User extends Model
      * @var integer
      * @Primary
      * @Identity
-     * @Column(type="integer", length=11, nullable=false)
+     * @Column(column="id", type="integer", length=11, nullable=false)
      */
     public $id;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=64, nullable=false)
+     * @Column(column="username", type="string", length=64, nullable=false)
      */
     public $username;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=64, nullable=false)
+     * @Column(column="password", type="string", length=64, nullable=false)
      */
     public $password;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=32, nullable=false)
+     * @Column(column="nickname", type="string", length=32, nullable=false)
      */
     public $nickname;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=64, nullable=false)
+     * @Column(column="email", type="string", length=64, nullable=false)
      */
     public $email;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=32, nullable=false)
+     * @Column(column="mobile", type="string", length=32, nullable=false)
      */
     public $mobile;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(column="created_at", type="string", nullable=true)
      */
     public $created_at;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(column="updated_at", type="string", nullable=true)
      */
     public $updated_at;
 
@@ -95,6 +95,7 @@ class User extends Model
     {
         $this->setSchema("admin");
         $this->setSource("user");
+        parent::initialize();
     }
 
     /**
