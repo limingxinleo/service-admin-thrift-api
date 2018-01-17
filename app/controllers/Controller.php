@@ -8,13 +8,10 @@
 // +----------------------------------------------------------------------
 namespace App\Controllers;
 
-use App\Controllers\Traits\Response;
 use Xin\Phalcon\Logger\Factory;
 
 abstract class Controller extends \Phalcon\Mvc\Controller
 {
-    use Response;
-
     public function initialize()
     {
     }

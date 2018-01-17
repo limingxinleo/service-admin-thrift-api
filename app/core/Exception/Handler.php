@@ -25,7 +25,7 @@ class Handler
     private function __construct()
     {
         $this->di = FactoryDefault::getDefault();
-        $this->logger = di('logger')->getLogger('error', Sys::LOG_ADAPTER_FILE);;
+        $this->logger = di('logger')->getLogger('error', Sys::LOG_ADAPTER_FILE);
     }
 
     public static function getInstance()
@@ -65,5 +65,4 @@ class Handler
         echo $msg;
         exit(255);
     }
-
 }
