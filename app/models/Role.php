@@ -83,4 +83,5 @@ class Role extends Model
     {
         return 'role';
     }
+
 }

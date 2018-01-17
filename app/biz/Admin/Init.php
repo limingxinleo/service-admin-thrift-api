@@ -10,6 +10,7 @@ namespace App\Biz\Admin;
 
 use App\Biz\BizException;
 use App\Common\Enums\ErrorCode;
+use App\Common\Enums\SystemCode;
 use App\Models\User as UserModel;
 use App\Biz\Base;
 
@@ -42,6 +43,7 @@ class Init extends Base
         $user = new UserModel();
         $user->username = 'superadmin';
         $user->password = password('superadmin');
+        $user->type = SystemCode::ADMIN_USER_SUPER_TYPE;
         $user->nickname = '超级管理员';
         $user->email = '715557344@qq.com';
         return $user->save();

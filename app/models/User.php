@@ -33,6 +33,13 @@ class User extends Model
 
     /**
      *
+     * @var integer
+     * @Column(column="type", type="integer", length=3, nullable=false)
+     */
+    public $type;
+
+    /**
+     *
      * @var string
      * @Column(column="nickname", type="string", length=32, nullable=false)
      */
@@ -129,4 +136,5 @@ class User extends Model
     {
         return 'user';
     }
+
 }
