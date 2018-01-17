@@ -89,5 +89,4 @@ class Menu extends Model
     {
         return parent::findFirst($parameters);
     }
-
 }

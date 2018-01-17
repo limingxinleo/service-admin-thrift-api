@@ -8,8 +8,5 @@ class UserController extends AuthController
 {
     public function infoAction()
     {
-
     }
-
 }
-

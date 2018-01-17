@@ -10,5 +10,4 @@ namespace App\Biz;
 
 class BizException extends \Exception
 {
-
 }

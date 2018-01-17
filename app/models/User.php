@@ -128,5 +128,4 @@ class User extends Model
     {
         return 'user';
     }
-
 }

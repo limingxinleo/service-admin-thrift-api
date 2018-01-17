@@ -8,12 +8,8 @@
 // +----------------------------------------------------------------------
 namespace App\Controllers;
 
-use App\Controllers\Traits\Response;
-
 abstract class AuthController extends Controller
 {
-    use Response;
-
     public function initialize()
     {
     }

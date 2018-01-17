@@ -39,7 +39,6 @@ class User extends Base
         $this->token = Text::random(16);
 
         $this->setUserCache();
-
     }
 
     protected function setUserCache()
@@ -69,5 +68,4 @@ class User extends Base
 
         throw new BizException('TOKEN已超时', ErrorCode::$ENUM_TOKEN_TIMEOUT);
     }
-
 }

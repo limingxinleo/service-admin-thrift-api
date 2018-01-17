@@ -82,5 +82,4 @@ class RoleMenu extends Model
     {
         return parent::findFirst($parameters);
     }
-
 }
