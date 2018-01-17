@@ -44,7 +44,7 @@ class User extends Base
     protected function setUserCache()
     {
         if (empty($this->token) || empty($this->user)) {
-            throw new BizException('授权信息保存失败', ErrorCode::$ENUM_SYSTEM_ERROR);
+            throw new BizException(ErrorCode::$ENUM_SYSTEM_ERROR, '授权信息保存失败');
         }
 
         return Redis::set($this->token, serialize($this->user), 3600);
@@ -66,6 +66,6 @@ class User extends Base
             }
         }
 
-        throw new BizException('TOKEN已超时', ErrorCode::$ENUM_TOKEN_TIMEOUT);
+        throw new BizException(ErrorCode::$ENUM_TOKEN_TIMEOUT);
     }
 }

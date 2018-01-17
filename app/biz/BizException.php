@@ -8,6 +8,18 @@
 // +----------------------------------------------------------------------
 namespace App\Biz;
 
+use App\Common\Enums\ErrorCode;
+use Throwable;
+
 class BizException extends \Exception
 {
+    public function __construct($code = 0, $message = "", Throwable $previous = null)
+    {
+        if (empty($message)) {
+            $message = ErrorCode::getMessage($code) ?? '';
+        }
+
+        parent::__construct($message, $code, $previous);
+    }
+
 }

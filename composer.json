@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.0",
         "ext-phalcon": "^3.0",
         "limingxinleo/x-phalcon-enum": "^0.0.2",
         "limingxinleo/thrift": "^0.11.0",
