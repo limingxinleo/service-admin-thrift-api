@@ -21,6 +21,8 @@ $router->group(function () {
     // 管理员基本信息
     $api->add('/user/info', 'App\\Controllers\\Admin\\User::info');
 
+    // 获取所有定义的路由
+    $api->add('/router/index', 'App\\Controllers\\Admin\\Router::index');
 
     return $api;
 });

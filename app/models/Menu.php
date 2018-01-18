@@ -90,5 +90,4 @@ class Menu extends Model
     {
         return 'menu';
     }
-
 }

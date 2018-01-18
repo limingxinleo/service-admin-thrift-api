@@ -83,5 +83,4 @@ class RoleMenu extends Model
     {
         return 'role_menu';
     }
-
 }
