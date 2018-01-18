@@ -8,6 +8,10 @@
 // +----------------------------------------------------------------------
 namespace App\Controllers;
 
+use App\Biz\Auth\User;
+use App\Biz\BizException;
+use App\Common\Enums\ErrorCode;
+
 abstract class AuthController extends Controller
 {
     public function initialize()
@@ -16,7 +20,13 @@ abstract class AuthController extends Controller
 
     public function beforeExecuteRoute()
     {
-        // 在每一个找到的动作前执行
+        $token = $this->request->get('token');
+        if (empty($token)) {
+            throw new BizException(ErrorCode::$ENUM_TOKEN_REQUIRED);
+        }
+
+        $user = User::getInstance()->getUserCache($token);
+        
     }
 
     public function afterExecuteRoute()

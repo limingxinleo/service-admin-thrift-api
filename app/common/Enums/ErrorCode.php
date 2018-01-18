@@ -19,14 +19,19 @@ class ErrorCode extends Enum
     public static $ENUM_SYSTEM_ERROR = 400;
 
     /**
-     * @Message('无效的TOKEN')
+     * @Message('TOKEN必填')
      */
-    public static $ENUM_TOKEN_INVALID = 700;
+    public static $ENUM_TOKEN_REQUIRED = 700;
 
     /**
-     * @Message('TOKEN已超时')
+     * @Message('TOKEN无效或已超时')
      */
     public static $ENUM_TOKEN_TIMEOUT = 701;
+
+    /**
+     * @Message('账号不存在或者密码错误')
+     */
+    public static $ENUM_PASSWORD_INVALID = 702;
 
     /**
      * @Message('超级管理员已存在')

@@ -45,7 +45,7 @@ class User extends Base
         $this->user = $user;
         $this->token = Text::random(16);
 
-        $this->setUserCache();
+        return $this->setUserCache();
     }
 
     protected function setUserCache()
@@ -69,7 +69,7 @@ class User extends Base
         if ($res && $user = unserialize($res)) {
             if ($user instanceof UserModel) {
                 Redis::expire($token, 3600);
-                return $user;
+                return $this->user = $user;
             }
         }
 
