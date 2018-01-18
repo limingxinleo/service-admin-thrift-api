@@ -18,6 +18,7 @@ class LoginController extends Controller
         if ($validator->validate($this->request->get())->valid()) {
             return Response::fail(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
         }
+
         $username = $validator->getValue('username');
         $password = $validator->getValue('password');
 

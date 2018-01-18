@@ -26,7 +26,6 @@ abstract class AuthController extends Controller
         }
 
         $user = User::getInstance()->getUserCache($token);
-        
     }
 
     public function afterExecuteRoute()

@@ -19,7 +19,8 @@ class LoginValidator extends Validator
             [
                 'username',
                 'password'
-            ], new PresenceOf([
+            ],
+            new PresenceOf([
                 'message' => 'The :field is required'
             ])
         );
