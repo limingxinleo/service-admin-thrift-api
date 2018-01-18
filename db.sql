@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.20)
 # Database: admin
-# Generation Time: 2018-01-17 13:42:19 +0000
+# Generation Time: 2018-01-18 02:15:40 +0000
 # ************************************************************
 
 
@@ -20,14 +20,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Dump of table menu
+# Dump of table router
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `menu`;
+DROP TABLE IF EXISTS `router`;
 
-CREATE TABLE `menu` (
+CREATE TABLE `router` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `pid` int(11) unsigned NOT NULL,
+  `pid` int(11) unsigned NOT NULL DEFAULT '0',
   `name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '接口名',
   `route` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '接口路由',
   `created_at` datetime DEFAULT NULL,
@@ -53,15 +53,15 @@ CREATE TABLE `role` (
 
 
 
-# Dump of table role_menu
+# Dump of table role_router
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `role_menu`;
+DROP TABLE IF EXISTS `role_router`;
 
-CREATE TABLE `role_menu` (
+CREATE TABLE `role_router` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `role_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '角色ID',
-  `menu_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '接口ID',
+  `router_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '接口ID',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
