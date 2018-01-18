@@ -15,8 +15,4 @@ return [
     'error-code' => [
         500 => '服务器错误！',
     ],
-
-    'admin' => [
-        'passwordKey' => env('ADMIN_PASSWORD_KEY', 'HelloWorld'),
-    ],
 ];

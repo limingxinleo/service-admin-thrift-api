@@ -10,6 +10,7 @@ namespace App\Core\Services;
 
 use Phalcon\DI\FactoryDefault;
 use Phalcon\Config;
+use Xin\Phalcon\Config\Center\Client;
 
 class ConfigService implements ServiceProviderInterface
 {
@@ -21,5 +22,10 @@ class ConfigService implements ServiceProviderInterface
         $di->setShared('config', function () use ($config) {
             return $config;
         });
+
+        // 载入配置中心
+        $dir = $config->application->configDir . 'center/';
+
+        Client::getInstance()->load($dir);
     }
 }

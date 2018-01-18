@@ -16,6 +16,19 @@ if (!function_exists('password')) {
      */
     function password($password)
     {
-        return md5(md5($password) . app('admin')->passwordKey);
+        return md5(md5($password) . config('base')->passwordKey);
+    }
+}
+
+if (!function_exists('config')) {
+    /**
+     * @desc   获取自定义配置
+     * @author limx
+     * @param $key
+     * @return string
+     */
+    function config($key)
+    {
+        return \Xin\Phalcon\Config\Center\Client::getInstance()->get($key);
     }
 }
