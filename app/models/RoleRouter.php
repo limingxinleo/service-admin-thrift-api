@@ -49,6 +49,7 @@ class RoleRouter extends Model
     {
         $this->setSchema("admin");
         $this->setSource("role_router");
+        parent::initialize();
     }
 
     /**

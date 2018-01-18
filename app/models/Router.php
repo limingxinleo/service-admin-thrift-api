@@ -56,6 +56,7 @@ class Router extends Model
     {
         $this->setSchema("admin");
         $this->setSource("router");
+        parent::initialize();
     }
 
     /**
