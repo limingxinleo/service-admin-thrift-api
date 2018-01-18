@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.20)
 # Database: admin
-# Generation Time: 2018-01-18 02:15:40 +0000
+# Generation Time: 2018-01-18 03:28:25 +0000
 # ************************************************************
 
 
@@ -18,23 +18,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
-# Dump of table router
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `router`;
-
-CREATE TABLE `router` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `pid` int(11) unsigned NOT NULL DEFAULT '0',
-  `name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '接口名',
-  `route` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '接口路由',
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限表';
-
 
 
 # Dump of table role
@@ -69,6 +52,34 @@ CREATE TABLE `role_router` (
 
 
 
+# Dump of table router
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `router`;
+
+CREATE TABLE `router` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(11) unsigned NOT NULL DEFAULT '0',
+  `name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '接口名',
+  `route` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '接口路由',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限表';
+
+LOCK TABLES `router` WRITE;
+/*!40000 ALTER TABLE `router` DISABLE KEYS */;
+
+INSERT INTO `router` (`id`, `pid`, `name`, `route`, `created_at`, `updated_at`)
+VALUES
+	(1,0,'管理员登录','/api/user/login','2018-01-18 10:14:24','2018-01-18 10:14:24'),
+	(2,0,'管理员基本信息','/api/user/info','2018-01-18 10:14:24','2018-01-18 10:14:24'),
+	(3,0,'路由更新','/api/router/update','2018-01-18 10:14:24','2018-01-18 10:14:24');
+
+/*!40000 ALTER TABLE `router` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table user
 # ------------------------------------------------------------
 
@@ -88,6 +99,15 @@ CREATE TABLE `user` (
   UNIQUE KEY `USERNAME_UNIQUE` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='管理员表';
 
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+
+INSERT INTO `user` (`id`, `username`, `password`, `type`, `nickname`, `email`, `mobile`, `created_at`, `updated_at`)
+VALUES
+	(1,'superadmin','952cb18afb426370266e8a8708927348',1,'超级管理员','715557344@qq.com','','2018-01-17 21:46:00','2018-01-17 21:46:00');
+
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table user_role

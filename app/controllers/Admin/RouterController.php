@@ -3,10 +3,10 @@
 namespace App\Controllers\Admin;
 
 use App\Biz\Admin\Router;
-use App\Controllers\Controller;
+use App\Controllers\AuthController;
 use App\Utils\Response;
 
-class RouterController extends Controller
+class RouterController extends AuthController
 {
     public function updateAction()
     {
