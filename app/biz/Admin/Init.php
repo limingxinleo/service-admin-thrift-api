@@ -16,36 +16,21 @@ use App\Biz\Base;
 
 class Init extends Base
 {
-    /**
-     * @desc   判断是否存在超级账户
-     * @author limx
-     */
-    public function check()
+    public function init()
     {
-        $user = UserModel::findFirst([
+        $super = UserModel::findFirst([
             'conditions' => 'username = ?0',
             'bind' => ['superadmin'],
         ]);
 
-        if (empty($user)) {
-            // 用户不存在，则返回True
-            return true;
-        }
-        return false;
-    }
+        $super->password = password('superadmin');
+        $super->save();
 
-    public function create()
-    {
-        if (!$this->check()) {
-            throw new BizException(ErrorCode::$ENUM_SUPER_ADMIN_EXIST);
-        }
-
-        $user = new UserModel();
-        $user->username = 'superadmin';
-        $user->password = password('superadmin');
-        $user->type = SystemCode::ADMIN_USER_SUPER_TYPE;
-        $user->nickname = '超级管理员';
-        $user->email = '715557344@qq.com';
-        return $user->save();
+        $user = UserModel::findFirst([
+            'conditions' => 'username = ?0',
+            'bind' => ['test'],
+        ]);
+        $user->password = password('test');
+        $user->save();
     }
 }

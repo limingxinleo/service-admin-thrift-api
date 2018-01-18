@@ -22,8 +22,8 @@ class InitTask extends Task
     public function adminAction()
     {
         try {
-            Init::getInstance()->create();
-            echo Color::success('超级管理员新建成功');
+            Init::getInstance()->init();
+            echo Color::success('管理员数据重置成功');
         } catch (\Exception $ex) {
             echo Color::error($ex->getMessage());
         }
