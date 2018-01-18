@@ -43,7 +43,7 @@ class User extends Base
         }
 
         $this->user = $user;
-        $this->token = Text::random(16);
+        $this->token = $user->id . ':' . Text::random(Text::RANDOM_ALPHA, 32);
 
         return $this->setUserCache();
     }
