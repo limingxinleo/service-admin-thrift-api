@@ -6,8 +6,13 @@ use App\Controllers\Controller;
 
 class RouterController extends Controller
 {
-    public function indexAction()
+    public function updateAction()
     {
-        echo 1;
+        $routes = $this->router->getRoutes();
+        foreach ($routes as $route) {
+            $pattern = $route->getPattern();
+            $name = $route->getName();
+            dump($name, $pattern);
+        }
     }
 }

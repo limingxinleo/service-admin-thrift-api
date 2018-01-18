@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class RoleMenu extends Model
+class Router extends Model
 {
 
     /**
@@ -17,16 +17,23 @@ class RoleMenu extends Model
     /**
      *
      * @var integer
-     * @Column(column="role_id", type="integer", length=11, nullable=false)
+     * @Column(column="pid", type="integer", length=11, nullable=false)
      */
-    public $role_id;
+    public $pid;
 
     /**
      *
-     * @var integer
-     * @Column(column="menu_id", type="integer", length=11, nullable=false)
+     * @var string
+     * @Column(column="name", type="string", length=32, nullable=false)
      */
-    public $menu_id;
+    public $name;
+
+    /**
+     *
+     * @var string
+     * @Column(column="route", type="string", length=64, nullable=false)
+     */
+    public $route;
 
     /**
      *
@@ -48,15 +55,24 @@ class RoleMenu extends Model
     public function initialize()
     {
         $this->setSchema("admin");
-        $this->setSource("role_menu");
-        parent::initialize();
+        $this->setSource("router");
+    }
+
+    /**
+     * Returns table name mapped in the model.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return 'router';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return RoleMenu[]|RoleMenu|\Phalcon\Mvc\Model\ResultSetInterface
+     * @return Router[]|Router|\Phalcon\Mvc\Model\ResultSetInterface
      */
     public static function find($parameters = null)
     {
@@ -67,20 +83,11 @@ class RoleMenu extends Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return RoleMenu|\Phalcon\Mvc\Model\ResultInterface
+     * @return Router|\Phalcon\Mvc\Model\ResultInterface
      */
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
     }
 
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'role_menu';
-    }
 }
