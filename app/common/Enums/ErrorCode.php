@@ -47,4 +47,9 @@ class ErrorCode extends Enum
      * @Message('路由名字没有定义')
      */
     public static $ENUM_ROUTER_NAME_IS_NOT_DEFINED = 1010;
+
+    /**
+     * @Message('入参不符')
+     */
+    public static $ENUM_PARAMS_ERROR = 2000;
 }
