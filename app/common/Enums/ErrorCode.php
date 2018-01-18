@@ -37,4 +37,9 @@ class ErrorCode extends Enum
      * @Message('超级管理员不允许删除')
      */
     public static $ENUM_SUPER_ADMIN_SHOULD_NOT_DELETE = 1001;
+
+    /**
+     * @Message('路由名字没有定义')
+     */
+    public static $ENUM_ROUTER_NAME_IS_NOT_DEFINED = 1010;
 }
