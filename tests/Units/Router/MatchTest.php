@@ -56,6 +56,5 @@ class MatchTest extends UnitTestCase
 
         $this->assertFalse(Match::getInstance()->isMatchRouter('/', $regular));
         $this->assertFalse(Match::getInstance()->isMatchRouter('/api/index2', $regular));
-
     }
 }

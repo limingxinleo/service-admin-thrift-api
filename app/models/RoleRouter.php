@@ -83,5 +83,4 @@ class RoleRouter extends Model
     {
         return parent::findFirst($parameters);
     }
-
 }
