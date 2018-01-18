@@ -10,8 +10,10 @@ namespace App\Biz\Admin;
 
 use App\Biz\BizException;
 use App\Common\Enums\ErrorCode;
+use App\Common\Enums\SystemCode;
 use Xin\Traits\Common\InstanceTrait;
 use App\Models\Router as RouterModel;
+use App\Models\User as UserModel;
 
 class Router
 {
@@ -26,7 +28,10 @@ class Router
     public function update($route, $name = null)
     {
         if (empty($name)) {
-            throw new BizException(ErrorCode::$ENUM_ROUTER_NAME_IS_NOT_DEFINED);
+            throw new BizException(
+                ErrorCode::$ENUM_ROUTER_NAME_IS_NOT_DEFINED,
+                $route . '路由名字未定义'
+            );
         }
 
         $router = RouterModel::findFirst([
@@ -47,5 +52,19 @@ class Router
         }
 
         return true;
+    }
+
+    /**
+     * @desc   用户是否有当前路由的访问权限
+     * @author limx
+     */
+    public function isMatch($id, $route)
+    {
+        $user = UserModel::findFirst($id);
+        if ($user->type === SystemCode::ADMIN_USER_SUPER_TYPE) {
+            return true;
+        }
+
+        return false;
     }
 }

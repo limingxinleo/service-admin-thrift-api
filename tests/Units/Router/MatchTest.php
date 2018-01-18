@@ -16,11 +16,46 @@ use Tests\UnitTestCase;
  */
 class MatchTest extends UnitTestCase
 {
-    public function testBaseCase()
+    public function testAllRouterCase()
     {
-        $router = '/';
         $regular = '/*';
+        $routers = [
+            '/',
+            '/index/index',
+            '/test/index',
+        ];
+        foreach ($routers as $router) {
+            $this->assertTrue(Match::getInstance()->isMatchRouter($router, $regular));
+        }
+    }
 
-        $this->assertTrue(Match::getInstance()->isMatchRouter($router, $regular));
+    public function testApiRouterCase()
+    {
+        $regular = '/api/*';
+        $routers = [
+            '/api/test',
+            '/api/index',
+        ];
+        foreach ($routers as $router) {
+            $this->assertTrue(Match::getInstance()->isMatchRouter($router, $regular));
+        }
+
+        $routers = [
+            '/',
+            '/apii/index',
+        ];
+        foreach ($routers as $router) {
+            $this->assertFalse(Match::getInstance()->isMatchRouter($router, $regular));
+        }
+    }
+
+    public function testRouterCase()
+    {
+        $regular = '/api/index';
+        $this->assertTrue(Match::getInstance()->isMatchRouter($regular, $regular));
+
+        $this->assertFalse(Match::getInstance()->isMatchRouter('/', $regular));
+        $this->assertFalse(Match::getInstance()->isMatchRouter('/api/index2', $regular));
+
     }
 }
