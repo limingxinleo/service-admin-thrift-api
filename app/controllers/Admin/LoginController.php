@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         if (!User::getInstance()->login($username, $password)) {
             // 登录失败
-            throw new BizException(ErrorCode::$ENUM_PASSWORD_INVALID);
+            return Response::fail(ErrorCode::$ENUM_PASSWORD_INVALID);
         }
 
         return Response::success([

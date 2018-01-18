@@ -18,6 +18,7 @@ class Response
         $response = di('response');
         return $response
             ->setHeader('Access-Control-Allow-Origin', '*')
+            ->setHeader('Access-Control-Allow-Headers', '*')
             ->setJsonContent($data);
     }
 

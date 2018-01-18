@@ -48,6 +48,11 @@ class User extends Base
         return $this->setUserCache();
     }
 
+    public function logout()
+    {
+        return Redis::del($this->token);
+    }
+
     protected function setUserCache()
     {
         if (empty($this->token) || empty($this->user)) {
@@ -69,6 +74,7 @@ class User extends Base
         if ($res && $user = unserialize($res)) {
             if ($user instanceof UserModel) {
                 Redis::expire($token, 3600);
+                $this->token = $token;
                 return $this->user = $user;
             }
         }

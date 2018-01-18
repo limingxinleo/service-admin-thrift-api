@@ -48,6 +48,13 @@ class User extends Model
     /**
      *
      * @var string
+     * @Column(column="avatar", type="string", length=1000, nullable=false)
+     */
+    public $avatar;
+
+    /**
+     *
+     * @var string
      * @Column(column="email", type="string", length=64, nullable=false)
      */
     public $email;
@@ -136,4 +143,5 @@ class User extends Model
     {
         return 'user';
     }
+
 }

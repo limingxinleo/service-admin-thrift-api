@@ -46,9 +46,9 @@ class Handler
         $msg = $ex->getMessage() . ' code:' . $ex->getCode() . ' in ' . $ex->getFile() . ' line ' . $ex->getLine() . PHP_EOL . $ex->getTraceAsString();
         $this->logger->error($msg);
         if (env('APP_DEBUG', false)) {
-            echo Response::fail($ex->getCode(), $ex->getMessage())->getContent();
+            Response::fail($ex->getCode(), $ex->getMessage())->send();
         } else {
-            echo Response::fail($ex->getCode())->getContent();
+            Response::fail($ex->getCode())->send();
         }
         exit(255);
     }

@@ -19,6 +19,11 @@ class ErrorCode extends Enum
     public static $ENUM_SYSTEM_ERROR = 400;
 
     /**
+     * @Message('通用错误')
+     */
+    public static $ENUM_COMMON_ERROR = 401;
+
+    /**
      * @Message('TOKEN必填')
      */
     public static $ENUM_TOKEN_REQUIRED = 700;
@@ -32,6 +37,11 @@ class ErrorCode extends Enum
      * @Message('账号不存在或者密码错误')
      */
     public static $ENUM_PASSWORD_INVALID = 702;
+
+    /**
+     * @Message('账号登出失败')
+     */
+    public static $ENUM_LOGOUT_FAIL = 703;
 
     /**
      * @Message('超级管理员已存在')
