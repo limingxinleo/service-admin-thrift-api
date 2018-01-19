@@ -93,7 +93,7 @@ class User extends Model
             'email',
             new EmailValidator(
                 [
-                    'model'   => $this,
+                    'model' => $this,
                     'message' => 'Please enter a correct email address',
                 ]
             )
@@ -109,6 +109,18 @@ class User extends Model
     {
         $this->setSchema("admin");
         $this->setSource("user");
+        $this->hasManyToMany(
+            'id',
+            UserRole::class,
+            'user_id',
+            'role_id',
+            Role::class,
+            'id',
+            [
+                'reusable' => true,
+                'alias' => 'roles'
+            ]
+        );
         parent::initialize();
     }
 

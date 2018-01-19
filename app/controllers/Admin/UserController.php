@@ -8,6 +8,7 @@ use App\Common\Enums\ErrorCode;
 use App\Common\Validator\Admin\UserListValidator;
 use App\Controllers\AuthController;
 use App\Core\Services\Error;
+use App\Models\Role;
 use App\Utils\Response;
 
 class UserController extends AuthController
@@ -45,13 +46,22 @@ class UserController extends AuthController
 
         $result = [];
         foreach ($users as $user) {
+            $roles = [];
+            /** @var Role $role */
+            foreach ($user->roles as $role) {
+                $roles[] = [
+                    'name' => $role->role_name,
+                ];
+            }
             $result[] = [
                 'id' => $user->id,
                 'nickname' => $user->nickname,
+                'username' => $user->username,
                 'avatar' => $user->avatar,
                 'type' => $user->type,
                 'typeName' => \App\Biz\Admin\User::getInstance()->getTypeName($user->type),
                 'createdAt' => $user->created_at,
+                'roles' => $roles,
             ];
         }
 
