@@ -32,3 +32,4 @@ if (!function_exists('config')) {
         return \Xin\Phalcon\Config\Center\Client::getInstance()->get($key);
     }
 }
+

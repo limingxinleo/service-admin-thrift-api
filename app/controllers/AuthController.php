@@ -20,10 +20,11 @@ abstract class AuthController extends Controller
 
     public function beforeExecuteRoute()
     {
-        $token = $this->request->get('token');
-        if (empty($token)) {
+
+        if (!$this->request->hasHeader('X-AUTH-TOKEN')) {
             throw new BizException(ErrorCode::$ENUM_TOKEN_REQUIRED);
         }
+        $token = $this->request->getHeader('X-AUTH-TOKEN');
 
         $user = User::getInstance()->getUserCache($token);
     }
