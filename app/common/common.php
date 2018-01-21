@@ -44,4 +44,3 @@ if (!function_exists('get_default_avatar')) {
         return di('config')->domain . '/static/images/logo.png';
     }
 }
-

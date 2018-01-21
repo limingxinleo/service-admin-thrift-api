@@ -62,7 +62,7 @@ class User extends Base
     {
         if ($type === SystemCode::ADMIN_USER_SUPER_TYPE) {
             return 'Super';
-        } else if ($type === SystemCode::ADMIN_USER_NORMAL_TYPE) {
+        } elseif ($type === SystemCode::ADMIN_USER_NORMAL_TYPE) {
             return 'Normal';
         }
         return '未知';

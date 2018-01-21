@@ -97,5 +97,4 @@ class Router extends Model
     {
         return 'router';
     }
-
 }

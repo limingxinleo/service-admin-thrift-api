@@ -83,5 +83,4 @@ class RoleRouter extends Model
     {
         return 'role_router';
     }
-
 }
