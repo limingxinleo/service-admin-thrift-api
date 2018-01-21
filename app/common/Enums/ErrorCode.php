@@ -61,5 +61,10 @@ class ErrorCode extends Enum
     /**
      * @Message('入参不符')
      */
-    public static $ENUM_PARAMS_ERROR = 2000;
+    public static $ENUM_PARAMS_ERROR = 1100;
+
+    /**
+     * @Message('保存管理员信息失败')
+     */
+    public static $ENUM_ADMIN_ADD_FAIL = 2000;
 }

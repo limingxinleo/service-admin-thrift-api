@@ -30,6 +30,29 @@ class User extends Base
     }
 
     /**
+     * @desc   保存管理员
+     * @author limx
+     * @param array $data
+     */
+    public function save(array $data)
+    {
+        if (isset($data['id'])) {
+            $user = UserModel::findFirst($data['id']);
+        }
+        if (empty($user)) {
+            $user = new UserModel();
+        }
+        $user->nickname = $data['nickname'];
+        $user->username = $data['username'];
+        $user->email = $data['email'];
+        $user->mobile = $data['mobile'];
+        $user->avatar = get_default_avatar();
+        $user->password = password('910123');
+
+        return $user->save();
+    }
+
+    /**
      * @desc   获取管理员类型
      * @author limx
      * @param $type

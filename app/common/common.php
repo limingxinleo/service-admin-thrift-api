@@ -33,3 +33,15 @@ if (!function_exists('config')) {
     }
 }
 
+if (!function_exists('get_default_avatar')) {
+
+    /**
+     * @desc   获取默认头像
+     * @author limx
+     */
+    function get_default_avatar()
+    {
+        return di('config')->domain . '/static/images/logo.png';
+    }
+}
+

@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Biz\Auth\User;
 use App\Biz\BizException;
 use App\Common\Enums\ErrorCode;
+use App\Common\Validator\Admin\UserAddValidator;
 use App\Common\Validator\Admin\UserListValidator;
 use App\Controllers\AuthController;
 use App\Core\Services\Error;
@@ -68,5 +69,33 @@ class UserController extends AuthController
         return Response::success([
             'items' => $result
         ]);
+    }
+
+    public function saveAction()
+    {
+        $data = $this->request->get();
+        $validator = new UserAddValidator();
+        if ($validator->validate($data)->valid()) {
+            return Response::fail(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
+        }
+
+        $username = $validator->getValue('username');
+        $nickname = $validator->getValue('nickname');
+        $email = $validator->getValue('email');
+        $mobile = $validator->getValue('mobile');
+        $id = $validator->getValue('id');
+
+        $result = \App\Biz\Admin\User::getInstance()->save([
+            'id' => $id,
+            'username' => $username,
+            'nickname' => $nickname,
+            'email' => $email,
+            'mobile' => $mobile,
+        ]);
+
+        if ($result) {
+            return Response::success();
+        }
+        return Response::fail(ErrorCode::$ENUM_ADMIN_ADD_FAIL);
     }
 }

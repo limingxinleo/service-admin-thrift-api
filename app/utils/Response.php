@@ -22,7 +22,7 @@ class Response
             ->setJsonContent($data);
     }
 
-    public static function success($data)
+    public static function success($data = null)
     {
         return static::response([
             'code' => 0,
