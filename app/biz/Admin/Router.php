@@ -67,4 +67,35 @@ class Router
 
         return false;
     }
+
+    /**
+     * @desc
+     * @author limx
+     * @param $pageIndex
+     * @param $pageSize
+     * @return RouterModel[]
+     */
+    public function routes($pageIndex, $pageSize)
+    {
+        return RouterModel::find([
+            'offset' => $pageSize * $pageIndex,
+            'limit' => $pageSize
+        ]);
+    }
+
+    /**
+     * @desc   获取管理员类型
+     * @author limx
+     * @param $type
+     * @return string
+     */
+    public function getTypeName($type)
+    {
+        if ($type === SystemCode::ADMIN_ROUTER_SYStEM_TYPE) {
+            return '系统路由';
+        } else if ($type === SystemCode::ADMIN_ROUTER_NORMAL_TYPE) {
+            return '自定义路由';
+        }
+        return '未知';
+    }
 }

@@ -22,6 +22,8 @@ $router->group(function () {
     $api->add('/user/save', 'App\\Controllers\\Admin\\User::save')->setName('保存管理员');
 
     $api->add('/router/update', 'App\\Controllers\\Admin\\Router::update')->setName('路由更新');
+    $api->add('/router/list', 'App\\Controllers\\Admin\\Router::list')->setName('路由列表');
+    $api->add('/router/save', 'App\\Controllers\\Admin\\Router::save')->setName('新增路由');
 
     return $api;
 });

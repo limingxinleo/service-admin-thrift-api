@@ -37,6 +37,13 @@ class Router extends Model
 
     /**
      *
+     * @var integer
+     * @Column(column="type", type="integer", length=4, nullable=false)
+     */
+    public $type;
+
+    /**
+     *
      * @var string
      * @Column(column="created_at", type="string", nullable=true)
      */
