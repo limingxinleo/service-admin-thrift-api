@@ -67,4 +67,9 @@ class ErrorCode extends Enum
      * @Message('保存管理员信息失败')
      */
     public static $ENUM_ADMIN_ADD_FAIL = 2000;
+
+    /**
+     * @Message('管理员登录名重复')
+     */
+    public static $ENUM_ADMIN_USERNAME_EXIST = 2001;
 }

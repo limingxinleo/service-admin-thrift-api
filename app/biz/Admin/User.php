@@ -9,6 +9,8 @@
 namespace App\Biz\Admin;
 
 use App\Biz\Base;
+use App\Biz\BizException;
+use App\Common\Enums\ErrorCode;
 use App\Common\Enums\SystemCode;
 use App\Models\User as UserModel;
 
@@ -40,6 +42,11 @@ class User extends Base
             $user = UserModel::findFirst($data['id']);
         }
         if (empty($user)) {
+            if ($this->checkUserNameExist($data['username'])) {
+                // 用户已存在
+                throw new BizException(ErrorCode::$ENUM_ADMIN_USERNAME_EXIST);
+            }
+            
             $user = new UserModel();
         }
         $user->nickname = $data['nickname'];
@@ -50,6 +57,25 @@ class User extends Base
         $user->password = password('910123');
 
         return $user->save();
+    }
+
+    /**
+     * @desc   判断用户名是否存在
+     * @author limx
+     * @param $username
+     * @return bool
+     */
+    public function checkUserNameExist($username)
+    {
+        $user = UserModel::findFirst([
+            'conditions' => 'username = ?0',
+            'bind' => [$username],
+        ]);
+
+        if ($user) {
+            return true;
+        }
+        return false;
     }
 
     /**
