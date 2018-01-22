@@ -25,5 +25,8 @@ $router->group(function () {
     $api->add('/router/list', 'App\\Controllers\\Admin\\Router::list')->setName('路由列表');
     $api->add('/router/save', 'App\\Controllers\\Admin\\Router::save')->setName('新增路由');
 
+    $api->add('/role/list', 'App\\Controllers\\Admin\\Role::list')->setName('角色列表');
+    $api->add('/role/save', 'App\\Controllers\\Admin\\Role::save')->setName('新增角色');
+
     return $api;
 });
