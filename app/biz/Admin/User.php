@@ -46,15 +46,21 @@ class User extends Base
                 // 用户已存在
                 throw new BizException(ErrorCode::$ENUM_ADMIN_USERNAME_EXIST);
             }
-            
+
             $user = new UserModel();
         }
         $user->nickname = $data['nickname'];
         $user->username = $data['username'];
         $user->email = $data['email'];
         $user->mobile = $data['mobile'];
-        $user->avatar = get_default_avatar();
-        $user->password = password('910123');
+
+        if (empty($user->avatar)) {
+            $user->avatar = get_default_avatar();
+        }
+
+        if (empty($user->password)) {
+            $user->password = password('910123');
+        }
 
         return $user->save();
     }

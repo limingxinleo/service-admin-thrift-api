@@ -11,6 +11,7 @@ namespace App\Biz\Admin;
 use App\Biz\BizException;
 use App\Common\Enums\ErrorCode;
 use App\Common\Enums\SystemCode;
+use App\Core\System;
 use Xin\Traits\Common\InstanceTrait;
 use App\Models\Router as RouterModel;
 use App\Models\User as UserModel;
@@ -43,11 +44,13 @@ class Router
             $router = new RouterModel();
             $router->route = $route;
             $router->name = $name;
+            $router->type = SystemCode::ADMIN_ROUTER_SYSTEM_TYPE;
             return $router->save();
         }
 
-        if ($router->name !== $name) {
+        if ($router->name !== $name || $router->type !== SystemCode::ADMIN_ROUTER_SYSTEM_TYPE) {
             $router->name = $name;
+            $router->type = SystemCode::ADMIN_ROUTER_SYSTEM_TYPE;
             return $router->save();
         }
 
@@ -91,7 +94,7 @@ class Router
      */
     public function getTypeName($type)
     {
-        if ($type === SystemCode::ADMIN_ROUTER_SYStEM_TYPE) {
+        if ($type === SystemCode::ADMIN_ROUTER_SYSTEM_TYPE) {
             return '系统路由';
         } elseif ($type === SystemCode::ADMIN_ROUTER_NORMAL_TYPE) {
             return '自定义路由';
