@@ -27,4 +27,25 @@ class Role extends Base
             'limit' => $pageSize
         ]);
     }
+
+    /**
+     * @desc   更新角色
+     * @author limx
+     * @param array $data
+     */
+    public function save(array $data)
+    {
+        if (isset($data['id'])) {
+            $role = RoleModel::findFirst($data['id']);
+        }
+
+        if (empty($role)) {
+            $role = new RoleModel();
+        }
+
+        $role->role_name = $data['roleName'];
+        $role->role_desc = $data['roleDesc'];
+
+        return $role->save();
+    }
 }

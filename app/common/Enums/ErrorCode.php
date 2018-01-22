@@ -82,4 +82,9 @@ class ErrorCode extends Enum
      * @Message('系统路由不允许修改')
      */
     public static $ENUM_SYSTEM_ROUTER_CAN_NOT_CHANGED = 2101;
+
+    /**
+     * @Message('角色保存失败')
+     */
+    public static $ENUM_ROLE_ADD_FAIL = 2200;
 }

@@ -8,12 +8,18 @@
 // +----------------------------------------------------------------------
 namespace App\Controllers;
 
+use App\Biz\BizException;
+use App\Common\Enums\ErrorCode;
+use App\Utils\Response;
 use Xin\Phalcon\Logger\Factory;
 
 abstract class Controller extends \Phalcon\Mvc\Controller
 {
     public function initialize()
     {
+        $this->middleware->set([
+            'method.filter'
+        ]);
     }
 
     public function beforeExecuteRoute()
@@ -25,7 +31,8 @@ abstract class Controller extends \Phalcon\Mvc\Controller
         $logger = $factory->getLogger('request');
         $message = PHP_EOL;
         $message .= '接口:' . $this->request->getURI() . PHP_EOL;
-        $message .= '参数:' . json_encode($request, JSON_UNESCAPED_UNICODE);
+        $message .= '方法:' . $this->request->getMethod() . PHP_EOL;
+        $message .= '参数:' . json_encode($request, JSON_UNESCAPED_UNICODE) . PHP_EOL;
         $logger->info($message);
     }
 

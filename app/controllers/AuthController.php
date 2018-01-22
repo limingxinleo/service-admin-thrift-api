@@ -16,6 +16,7 @@ abstract class AuthController extends Controller
 {
     public function initialize()
     {
+        parent::initialize();
     }
 
     public function beforeExecuteRoute()

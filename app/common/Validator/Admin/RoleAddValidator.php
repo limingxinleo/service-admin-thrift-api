@@ -17,8 +17,8 @@ class RoleAddValidator extends Validator
     {
         $this->add(
             [
-                'name',
-                'route',
+                'roleName',
+                'roleDesc',
             ],
             new PresenceOf([
                 'message' => 'The :field is required'
