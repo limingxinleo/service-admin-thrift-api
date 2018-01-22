@@ -26,7 +26,7 @@ class Router
      * @param $route
      * @param $name
      */
-    public function update($route, $name = null)
+    public function updateSystemRouter($route, $name = null)
     {
         if (empty($name)) {
             throw new BizException(
@@ -84,6 +84,30 @@ class Router
             'offset' => $pageSize * $pageIndex,
             'limit' => $pageSize
         ]);
+    }
+
+    /**
+     * @desc   保存路由
+     * @author limx
+     * @param array $data
+     */
+    public function save(array $data)
+    {
+        if (isset($data['id'])) {
+            $router = RouterModel::findFirst($data['id']);
+            if ($router->type === SystemCode::ADMIN_ROUTER_SYSTEM_TYPE) {
+                throw new BizException(ErrorCode::$ENUM_SYSTEM_ROUTER_CAN_NOT_CHANGED);
+            }
+        }
+
+        if (empty($router)) {
+            $router = new RouterModel();
+        }
+
+        $router->name = $data['name'];
+        $router->route = $data['route'];
+
+        return $router->save();
     }
 
     /**

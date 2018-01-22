@@ -3,6 +3,8 @@
 namespace App\Controllers\Admin;
 
 use App\Biz\Admin\Router;
+use App\Common\Enums\ErrorCode;
+use App\Common\Validator\Admin\RouterAddValidator;
 use App\Common\Validator\Admin\RouterListValidator;
 use App\Controllers\AuthController;
 use App\Utils\Response;
@@ -16,7 +18,7 @@ class RouterController extends AuthController
         foreach ($routes as $route) {
             $pattern = $route->getPattern();
             $name = $route->getName();
-            if (!Router::getInstance()->update($pattern, $name)) {
+            if (!Router::getInstance()->updateSystemRouter($pattern, $name)) {
                 $failed[] = ['route' => $pattern, 'name' => $name];
             }
         }
@@ -57,5 +59,24 @@ class RouterController extends AuthController
 
     public function saveAction()
     {
+        $data = $this->request->get();
+        $validator = new RouterAddValidator();
+        if ($validator->validate($data)->valid()) {
+            return Response::fail(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
+        }
+
+        $name = $validator->getValue('name');
+        $route = $validator->getValue('route');
+
+        $res = Router::getInstance()->save([
+            'name' => $name,
+            'route' => $route,
+        ]);
+
+        if ($res) {
+            return Response::success();
+        }
+
+        return Response::fail(ErrorCode::$ENUM_ROUTER_ADD_FAIL);
     }
 }

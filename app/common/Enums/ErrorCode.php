@@ -72,4 +72,14 @@ class ErrorCode extends Enum
      * @Message('管理员登录名重复')
      */
     public static $ENUM_ADMIN_USERNAME_EXIST = 2001;
+
+    /**
+     * @Message('路由保存失败')
+     */
+    public static $ENUM_ROUTER_ADD_FAIL = 2100;
+
+    /**
+     * @Message('系统路由不允许修改')
+     */
+    public static $ENUM_SYSTEM_ROUTER_CAN_NOT_CHANGED = 2101;
 }
