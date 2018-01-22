@@ -87,6 +87,16 @@ class Router
     }
 
     /**
+     * @desc   返回路由个数
+     * @author limx
+     * @return mixed
+     */
+    public function count()
+    {
+        return RouterModel::count();
+    }
+
+    /**
      * @desc   保存路由
      * @author limx
      * @param array $data

@@ -40,6 +40,7 @@ class RouterController extends AuthController
         $pageSize = $validator->getValue('pageSize');
 
         $items = Router::getInstance()->routes($pageIndex, $pageSize);
+        $count = Router::getInstance()->count();
         $result = [];
         foreach ($items as $item) {
             $result[] = [
@@ -53,7 +54,8 @@ class RouterController extends AuthController
         }
 
         return Response::success([
-            'items' => $result
+            'items' => $result,
+            'total' => $count
         ]);
     }
 
