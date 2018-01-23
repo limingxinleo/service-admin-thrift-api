@@ -19,5 +19,8 @@ class SystemCode
     const ADMIN_ROUTER_NORMAL_TYPE = 0; // 自定义类型
 
     // 模型缓存
-    const MODEL_CACHE_KEY = 'cache:model:%s:conditions:%s';
+    const REDIS_KEY_MODEL_CACHE_KEY = 'cache:model:%s:conditions:%s';
+
+    // 角色路由缓存
+    const REDIS_KEY_ROLE_ROUTER_CACHE_KEY = 'cache:role:%s:routers';
 }

@@ -96,7 +96,7 @@ class Router
     {
         return RouterModel::find([
             'cache' => [
-                'key' => sprintf(SystemCode::MODEL_CACHE_KEY, 'router', 'all'),
+                'key' => sprintf(SystemCode::REDIS_KEY_MODEL_CACHE_KEY, 'router', 'all'),
                 'lifetime' => 3600,
             ],
         ]);

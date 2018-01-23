@@ -116,4 +116,13 @@ class RoleController extends AuthController
         }
         return Response::fail(ErrorCode::$ENUM_ROLE_BIND_ROUTERS_FAIL);
     }
+
+    public function reloadRoutersAction()
+    {
+        $res = Role::getInstance()->reloadRouters();
+        if ($res) {
+            return Response::success();
+        }
+        return Response::fail(ErrorCode::$ENUM_ROLE_RELOAD_ROUTERS_FAIL);
+    }
 }

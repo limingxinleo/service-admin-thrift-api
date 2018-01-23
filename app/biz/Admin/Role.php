@@ -16,6 +16,7 @@ use App\Models\Role as RoleModel;
 use App\Models\RoleRouter;
 use App\Models\Router as RouterModel;
 use App\Utils\DB;
+use App\Utils\Redis;
 
 class Role extends Base
 {
@@ -97,6 +98,24 @@ class Role extends Base
             return false;
         }
 
+        return true;
+    }
+
+    /**
+     * @desc   刷新角色路由权限缓存
+     * @author limx
+     * @return bool
+     */
+    public function reloadRouters()
+    {
+        $roles = RoleModel::find();
+        foreach ($roles as $role) {
+            $redisKey = sprintf(SystemCode::REDIS_KEY_ROLE_ROUTER_CACHE_KEY, $role->id);
+            $routers = $role->routers->toArray();
+            $routes = array_column($routers, 'route');
+            Redis::del($redisKey);
+            Redis::sadd($redisKey, ...$routes);
+        }
 
         return true;
     }

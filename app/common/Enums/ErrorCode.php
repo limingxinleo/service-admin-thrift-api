@@ -107,4 +107,9 @@ class ErrorCode extends Enum
      * @Message('删除角色路由失败')
      */
     public static $ENUM_ROLE_DELETE_ROUTERS_FAIL = 2203;
+
+    /**
+     * @Message('刷新角色权限失败')
+     */
+    public static $ENUM_ROLE_RELOAD_ROUTERS_FAIL = 2204;
 }
