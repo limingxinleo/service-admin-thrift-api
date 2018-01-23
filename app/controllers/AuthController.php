@@ -11,6 +11,7 @@ namespace App\Controllers;
 use App\Biz\Auth\User;
 use App\Biz\BizException;
 use App\Common\Enums\ErrorCode;
+use App\Common\Enums\SystemCode;
 
 abstract class AuthController extends Controller
 {
@@ -29,6 +30,12 @@ abstract class AuthController extends Controller
         $token = $this->request->getHeader('X-AUTH-TOKEN');
 
         $user = User::getInstance()->getUserCache($token);
+
+        if ($user->type !== SystemCode::ADMIN_USER_SUPER_TYPE) {
+            // 非超级管理员，判断管理员是否有权限访问
+
+            throw new BizException(ErrorCode::$ENUM_ILLEGAL_REQUEST);
+        }
     }
 
     public function afterExecuteRoute()

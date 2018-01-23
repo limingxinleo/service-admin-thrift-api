@@ -44,6 +44,11 @@ class ErrorCode extends Enum
     public static $ENUM_LOGOUT_FAIL = 703;
 
     /**
+     * @Message('非法访问')
+     */
+    public static $ENUM_ILLEGAL_REQUEST = 704;
+
+    /**
      * @Message('超级管理员已存在')
      */
     public static $ENUM_SUPER_ADMIN_EXIST = 1000;

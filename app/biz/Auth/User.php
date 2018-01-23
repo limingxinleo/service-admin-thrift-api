@@ -66,7 +66,7 @@ class User extends Base
      * @desc
      * @author limx
      * @param $token
-     * @return mixed
+     * @return \App\Models\User
      */
     public function getUserCache($token)
     {
