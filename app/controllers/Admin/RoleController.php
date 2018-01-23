@@ -24,6 +24,8 @@ class RoleController extends Controller
         $pageSize = $validator->getValue('pageSize');
 
         $items = Role::getInstance()->roles($pageIndex, $pageSize);
+        $count = Role::getInstance()->count();
+
         $result = [];
         foreach ($items as $item) {
             $result[] = [
@@ -35,7 +37,8 @@ class RoleController extends Controller
         }
 
         return Response::success([
-            'items' => $result
+            'items' => $result,
+            'total' => $count
         ]);
     }
 

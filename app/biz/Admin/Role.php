@@ -29,6 +29,16 @@ class Role extends Base
     }
 
     /**
+     * @desc   返回角色总数
+     * @author limx
+     * @return mixed
+     */
+    public function count()
+    {
+        return RoleModel::count();
+    }
+
+    /**
      * @desc   更新角色
      * @author limx
      * @param array $data
