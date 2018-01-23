@@ -87,6 +87,22 @@ class Router
     }
 
     /**
+     * @desc   获取所有路由
+     * @author limx
+     * @cache('3600')
+     * @return RouterModel[]
+     */
+    public function all()
+    {
+        return RouterModel::find([
+            'cache' => [
+                'key' => sprintf(SystemCode::MODEL_CACHE_KEY, 'router', 'all'),
+                'lifetime' => 3600,
+            ],
+        ]);
+    }
+
+    /**
      * @desc   返回路由个数
      * @author limx
      * @return mixed

@@ -9,7 +9,9 @@
 namespace App\Biz\Admin;
 
 use App\Biz\Base;
+use App\Common\Enums\SystemCode;
 use App\Models\Role as RoleModel;
+use App\Models\Router as RouterModel;
 
 class Role extends Base
 {
@@ -36,6 +38,18 @@ class Role extends Base
     public function count()
     {
         return RoleModel::count();
+    }
+
+    /**
+     * @desc
+     * @author limx
+     * @param $roleId
+     * @return \App\Models\Router[]
+     */
+    public function routers($roleId)
+    {
+        $role = RoleModel::findFirst($roleId);
+        return $role->routers;
     }
 
     /**

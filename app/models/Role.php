@@ -49,6 +49,18 @@ class Role extends Model
     {
         $this->setSchema("admin");
         $this->setSource("role");
+        $this->hasManyToMany(
+            'id',
+            RoleRouter::class,
+            'role_id',
+            'router_id',
+            Router::class,
+            'id',
+            [
+                'reusable' => true,
+                'alias' => 'routers'
+            ]
+        );
         parent::initialize();
     }
 

@@ -17,4 +17,7 @@ class SystemCode
     // 路由类型
     const ADMIN_ROUTER_SYSTEM_TYPE = 1; // 系统类型
     const ADMIN_ROUTER_NORMAL_TYPE = 0; // 自定义类型
+
+    // 模型缓存
+    const MODEL_CACHE_KEY = 'cache:model:%s:conditions:%s';
 }
