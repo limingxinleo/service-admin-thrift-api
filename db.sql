@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.21)
 # Database: admin
-# Generation Time: 2018-01-22 06:46:41 +0000
+# Generation Time: 2018-01-23 09:23:13 +0000
 # ************************************************************
 
 
@@ -57,7 +57,9 @@ CREATE TABLE `role_router` (
   `router_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '接口ID',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `ROLE_INDEX` (`role_id`),
+  KEY `ROUTER_INDEX` (`router_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='角色权限表';
 
 LOCK TABLES `role_router` WRITE;
@@ -104,7 +106,8 @@ VALUES
 	(8,0,'路由列表','/api/router/list',1,'2018-01-22 10:13:45','2018-01-22 10:15:58'),
 	(9,0,'新增路由','/api/router/save',1,'2018-01-22 10:13:45','2018-01-22 10:15:58'),
 	(10,0,'角色列表','/api/role/list',1,'2018-01-22 12:46:35','2018-01-22 12:46:35'),
-	(11,0,'新增角色','/api/role/save',1,'2018-01-22 12:46:35','2018-01-22 12:46:35');
+	(11,0,'新增角色','/api/role/save',1,'2018-01-22 12:46:35','2018-01-22 12:46:35'),
+	(12,0,'获取某角色绑定的路由','/api/role/routers',1,'2018-01-23 14:30:36','2018-01-23 14:30:36');
 
 /*!40000 ALTER TABLE `router` ENABLE KEYS */;
 UNLOCK TABLES;

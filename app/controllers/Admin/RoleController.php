@@ -8,11 +8,11 @@ use App\Common\Enums\ErrorCode;
 use App\Common\Validator\Admin\RoleAddValidator;
 use App\Common\Validator\Admin\RoleListValidator;
 use App\Common\Validator\Admin\RoleRoutersValidator;
-use App\Controllers\Controller;
-use App\Core\Services\Error;
+use App\Common\Validator\Admin\UpdateRoleRoutersValidator;
+use App\Controllers\AuthController;
 use App\Utils\Response;
 
-class RoleController extends Controller
+class RoleController extends AuthController
 {
     public function listAction()
     {
@@ -97,5 +97,23 @@ class RoleController extends Controller
             'routes' => $routes,
             'total' => $total
         ]);
+    }
+
+    public function updateRoutersAction()
+    {
+        $data = $this->request->get();
+        $validator = new UpdateRoleRoutersValidator();
+        if ($validator->validate($data)->valid()) {
+            return Response::fail(ErrorCode::$ENUM_PARAMS_ERROR, $validator->getErrorMessage());
+        }
+
+        $id = $validator->getValue('id');
+        $routes = $validator->getValue('routes');
+
+        $res = Role::getInstance()->updateRouters($id, $routes);
+        if ($res) {
+            return Response::success();
+        }
+        return Response::fail(ErrorCode::$ENUM_ROLE_BIND_ROUTERS_FAIL);
     }
 }

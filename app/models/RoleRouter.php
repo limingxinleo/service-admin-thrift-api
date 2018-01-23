@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Utils\DB;
+
 class RoleRouter extends Model
 {
 
@@ -72,6 +74,20 @@ class RoleRouter extends Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * @desc   删除某角色所有路由
+     * @author limx
+     * @param $id
+     * @return bool
+     */
+    public static function deleteByRoleId($id)
+    {
+        $model = new static();
+        $table = $model->getSource();
+        $sql = "DELETE FROM {$table} WHERE role_id = ?";
+        return DB::execute($sql, [$id]);
     }
 
     /**

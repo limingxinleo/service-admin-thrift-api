@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Core\Exception;
 
+use App\Biz\BizException;
 use App\Utils\Response;
 use Exception;
 use ErrorException;
@@ -44,7 +45,11 @@ class Handler
     public function render(Exception $ex)
     {
         $msg = $ex->getMessage() . ' code:' . $ex->getCode() . ' in ' . $ex->getFile() . ' line ' . $ex->getLine() . PHP_EOL . $ex->getTraceAsString();
-        $this->logger->error($msg);
+        if ($ex instanceof BizException) {
+            $this->logger->info($msg);
+        } else {
+            $this->logger->error($msg);
+        }
         if (env('APP_DEBUG', false)) {
             Response::fail($ex->getCode(), $ex->getMessage())->send();
         } else {

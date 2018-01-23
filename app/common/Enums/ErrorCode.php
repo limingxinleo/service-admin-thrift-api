@@ -87,4 +87,19 @@ class ErrorCode extends Enum
      * @Message('角色保存失败')
      */
     public static $ENUM_ROLE_ADD_FAIL = 2200;
+
+    /**
+     * @Message('角色不存在')
+     */
+    public static $ENUM_ROLE_NOT_EXIST = 2201;
+
+    /**
+     * @Message('角色绑定路由失败')
+     */
+    public static $ENUM_ROLE_BIND_ROUTERS_FAIL = 2202;
+
+    /**
+     * @Message('删除角色路由失败')
+     */
+    public static $ENUM_ROLE_DELETE_ROUTERS_FAIL = 2203;
 }
