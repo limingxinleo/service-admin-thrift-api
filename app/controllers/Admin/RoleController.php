@@ -80,11 +80,7 @@ class RoleController extends Controller
         $routers = Role::getInstance()->routers($id);
         $routes = [];
         foreach ($routers as $router) {
-            $routes[] = [
-                'id' => $router->id,
-                'name' => $router->name,
-                'route' => $router->route,
-            ];
+            $routes[] = $router->id;
         }
 
         $routers = Router::getInstance()->all();
