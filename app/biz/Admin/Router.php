@@ -152,9 +152,12 @@ class Router
      */
     public function count(array $data = [])
     {
-        $param = null;
+        $param = [
+            'conditions' => ' 1=1 '
+        ];
+
         if (!empty($data['searchText']) && $searchText = $data['searchText']) {
-            $param['conditions'] = 'name like :name: or route like :route:';
+            $param['conditions'] .= ' AND (name like :name: OR route like :route:)';
             $param['bind'] = ['name' => $searchText . "%", 'route' => $searchText . "%"];
         }
 

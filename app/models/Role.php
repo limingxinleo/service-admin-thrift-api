@@ -66,6 +66,17 @@ class Role extends Model
 
     public function routers($pageIndex, $pageSize, $searchText)
     {
+        $router = Router::class;
+        $params = [];
+        $params['offset'] = $pageIndex * $pageSize;
+        $params['limit'] = $pageSize;
+        if (!empty($searchText)) {
+            $params['conditions'] = "([{$router}].[name] like :name: OR [{$router}].[route] like :route:)";
+            $params['bind'] = [
+                'name' => '%' . $searchText . '%',
+                'route' => '%' . $searchText . '%',
+            ];
+        }
         $this->hasManyToMany(
             'id',
             RoleRouter::class,
@@ -76,15 +87,7 @@ class Role extends Model
             [
                 'reusable' => true,
                 'alias' => 'routers',
-                'params' => [
-                    'condition' => '(router.name like :name: OR router.route like :route:)',
-                    'bind' => [
-                        'name' => '%' . $searchText . '%',
-                        'route' => '%' . $searchText . '%',
-                    ],
-                    'offset' => $pageIndex * $pageSize,
-                    'limit' => $pageSize
-                ]
+                'params' => $params
             ]
         );
 

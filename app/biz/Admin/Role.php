@@ -16,6 +16,7 @@ use App\Models\Role as RoleModel;
 use App\Models\RoleRouter;
 use App\Models\Router as RouterModel;
 use App\Utils\DB;
+use App\Utils\Log;
 use App\Utils\Redis;
 
 class Role extends Base
@@ -36,6 +37,17 @@ class Role extends Base
     }
 
     /**
+     * @desc   返回某角色
+     * @author limx
+     * @param $roleId
+     * @return RoleModel
+     */
+    public function info($roleId)
+    {
+        return RoleModel::findFirst($roleId);
+    }
+
+    /**
      * @desc   返回角色总数
      * @author limx
      * @return mixed
@@ -43,6 +55,29 @@ class Role extends Base
     public function count()
     {
         return RoleModel::count();
+    }
+
+    /**
+     * @desc   某角色路由总数
+     * @author limx
+     * @param array $data
+     */
+    public function routersCount($roleId, $data = [])
+    {
+        $query = RoleRouter::query()->where('role_id = :roleId:', ['roleId' => $roleId]);
+
+        if (!empty($data['searchText']) && $searchText = $data['searchText']) {
+            $router = RouterModel::class;
+            $roleRouter = RoleRouter::class;
+            $query->innerJoin($router, "[$router].[id] = [$roleRouter].[router_id]");
+            $query->andWhere('name like :name: OR route like :route:', [
+                'name' => "%" . $searchText . "%",
+                'route' => "%" . $searchText . "%",
+            ]);
+        }
+
+        $result = $query->execute();
+        return count($result);
     }
 
     /**

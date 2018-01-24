@@ -46,6 +46,9 @@ class DbListener
      */
     public function beforeQuery(Event $event, $connection)
     {
+        // $this->_logger->debug($connection->getSQLStatement());
+        // $this->_logger->debug(json_encode($connection->getSqlVariables()));
+
         $this->_profiler->startProfile(
             $connection->getSQLStatement(),
             $connection->getSqlVariables()

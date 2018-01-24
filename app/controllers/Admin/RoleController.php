@@ -83,14 +83,13 @@ class RoleController extends AuthController
         $searchText = $validator->getValue('searchText');
         $searchType = $validator->getValue('searchType');
 
-        $routers = Role::getInstance()->routers($id);
-        $count = count($routers);
-        $routes = [];
-        foreach ($routers as $router) {
-            $routes[] = $router->id;
-        }
-
         if ($searchType == SystemCode::ADMIN_ROUTER_SEARCH_TYPE_ALL) {
+            $routers = Role::getInstance()->routers($id);
+            $routes = [];
+            foreach ($routers as $router) {
+                $routes[] = $router->id;
+            }
+
             $routers = Router::getInstance()->routes([
                 'searchText' => $searchText,
                 'pageIndex' => $pageIndex,
@@ -99,15 +98,23 @@ class RoleController extends AuthController
             $count = Router::getInstance()->count([
                 'searchText' => $searchText,
             ]);
+        } else {
+            $role = Role::getInstance()->info($id);
+            $routers = $role->routers($pageIndex, $pageSize, $searchText);
+
+            $count = Role::getInstance()->routersCount($id, [
+                'searchText' => $searchText
+            ]);
         }
 
         $total = [];
         foreach ($routers as $router) {
+            $bound = $searchType == SystemCode::ADMIN_ROUTER_SEARCH_TYPE_BOUND ?: in_array($router->id, $routes);
             $total[] = [
                 'id' => $router->id,
                 'name' => $router->name,
                 'route' => $router->route,
-                'bound' => in_array($router->id, $routes) ?: false,
+                'bound' => $bound,
             ];
         }
 
