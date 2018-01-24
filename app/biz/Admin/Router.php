@@ -78,12 +78,17 @@ class Router
      * @param $pageSize
      * @return RouterModel[]
      */
-    public function routes($pageIndex, $pageSize)
+    public function routes(array $data)
     {
-        return RouterModel::find([
-            'offset' => $pageSize * $pageIndex,
-            'limit' => $pageSize
-        ]);
+        $pageIndex = $data['pageIndex'];
+        $pageSize = $data['pageSize'];
+        $query = RouterModel::query();
+        if (!empty($data['searchText']) && $searchText = $data['searchText']) {
+            $query = $query->where('name like :name:', ['name' => $searchText . "%"]);
+            $query = $query->orWhere('route like :route:', ['route' => $searchText . "%"]);
+        }
+
+        return $query->limit($pageSize, $pageSize * $pageIndex)->execute();
     }
 
     /**
@@ -107,9 +112,15 @@ class Router
      * @author limx
      * @return mixed
      */
-    public function count()
+    public function count(array $data = [])
     {
-        return RouterModel::count();
+        $param = null;
+        if (!empty($data['searchText']) && $searchText = $data['searchText']) {
+            $param['conditions'] = 'name like :name: or route like :route:';
+            $param['bind'] = ['name' => $searchText . "%", 'route' => $searchText . "%"];
+        }
+
+        return RouterModel::count($param);
     }
 
     /**

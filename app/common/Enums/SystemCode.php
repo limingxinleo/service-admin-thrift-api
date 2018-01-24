@@ -18,6 +18,9 @@ class SystemCode
     const ADMIN_ROUTER_SYSTEM_TYPE = 1; // 系统类型
     const ADMIN_ROUTER_NORMAL_TYPE = 0; // 自定义类型
 
+    const ADMIN_ROUTER_SEARCH_TYPE_ALL = 0; // 所有路由
+    const ADMIN_ROUTER_SEARCH_TYPE_BOUND = 1; // 已绑定的路由
+
     // 模型缓存
     const REDIS_KEY_MODEL_CACHE_KEY = 'cache:model:%s:conditions:%s';
 

@@ -19,7 +19,8 @@ class RoleRoutersValidator extends Validator
             [
                 'id',
                 'pageIndex',
-                'pageSize'
+                'pageSize',
+                'searchType'
             ],
             new PresenceOf([
                 'message' => 'The :field is required'

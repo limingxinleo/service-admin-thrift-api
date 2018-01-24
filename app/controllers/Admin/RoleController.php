@@ -5,11 +5,13 @@ namespace App\Controllers\Admin;
 use App\Biz\Admin\Role;
 use App\Biz\Admin\Router;
 use App\Common\Enums\ErrorCode;
+use App\Common\Enums\SystemCode;
 use App\Common\Validator\Admin\RoleAddValidator;
 use App\Common\Validator\Admin\RoleListValidator;
 use App\Common\Validator\Admin\RoleRoutersValidator;
 use App\Common\Validator\Admin\UpdateRoleRouterValidator;
 use App\Controllers\AuthController;
+use App\Core\System;
 use App\Utils\Response;
 
 class RoleController extends AuthController
@@ -78,15 +80,27 @@ class RoleController extends AuthController
         $id = $validator->getValue('id');
         $pageIndex = $validator->getValue('pageIndex');
         $pageSize = $validator->getValue('pageSize');
+        $searchText = $validator->getValue('searchText');
+        $searchType = $validator->getValue('searchType');
 
         $routers = Role::getInstance()->routers($id);
+        $count = count($routers);
         $routes = [];
         foreach ($routers as $router) {
             $routes[] = $router->id;
         }
 
-        $routers = Router::getInstance()->routes($pageIndex, $pageSize);
-        $count = Router::getInstance()->count();
+        if ($searchType == SystemCode::ADMIN_ROUTER_SEARCH_TYPE_ALL) {
+            $routers = Router::getInstance()->routes([
+                'searchText' => $searchText,
+                'pageIndex' => $pageIndex,
+                'pageSize' => $pageSize,
+            ]);
+            $count = Router::getInstance()->count([
+                'searchText' => $searchText,
+            ]);
+        }
+
         $total = [];
         foreach ($routers as $router) {
             $total[] = [
