@@ -102,6 +102,39 @@ class Role extends Base
     }
 
     /**
+     * @desc   更新角色某个路由
+     * @author limx
+     * @param $roleId
+     * @param $routerId
+     */
+    public function updateRouter($roleId, $routerId)
+    {
+        $role = RoleModel::findFirst($roleId);
+        if (empty($role)) {
+            throw new BizException(ErrorCode::$ENUM_ROLE_NOT_EXIST);
+        }
+
+        $router = RouterModel::findFirst($routerId);
+        if (empty($router)) {
+            throw new BizException(ErrorCode::$ENUM_ROUTER_NOT_EXIST);
+        }
+
+        $rel = RoleRouter::findFirst([
+            'conditions' => 'role_id=?0 AND router_id=?1',
+            'bind' => [$roleId, $routerId]
+        ]);
+
+        if ($rel) {
+            return $rel->delete();
+        }
+
+        $rel = new RoleRouter();
+        $rel->role_id = $roleId;
+        $rel->router_id = $routerId;
+        return $rel->save();
+    }
+
+    /**
      * @desc   刷新角色路由权限缓存
      * @author limx
      * @return bool

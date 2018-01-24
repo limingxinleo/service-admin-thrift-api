@@ -11,14 +11,14 @@ namespace App\Common\Validator\Admin;
 use App\Core\Validation\Validator;
 use Phalcon\Validation\Validator\PresenceOf;
 
-class UpdateRoleRoutersValidator extends Validator
+class UpdateRoleRouterValidator extends Validator
 {
     public function initialize()
     {
         $this->add(
             [
-                'id',
-                'routes'
+                'roleId',
+                'routerId'
             ],
             new PresenceOf([
                 'message' => 'The :field is required'

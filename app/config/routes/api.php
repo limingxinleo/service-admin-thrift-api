@@ -28,7 +28,7 @@ $router->group(function () {
     $api->add('/role/list', 'App\\Controllers\\Admin\\Role::list')->setName('角色列表');
     $api->add('/role/save', 'App\\Controllers\\Admin\\Role::save')->setName('新增角色');
     $api->add('/role/routers', 'App\\Controllers\\Admin\\Role::routers')->setName('获取某角色绑定的路由');
-    $api->add('/role/routers/update', 'App\\Controllers\\Admin\\Role::updateRouters')->setName('保存角色的路由');
+    $api->add('/role/routers/update', 'App\\Controllers\\Admin\\Role::updateRouter')->setName('更新角色路由');
     $api->add('/role/routers/reload', 'App\\Controllers\\Admin\\Role::reloadRouters')->setName('刷新角色权限缓存');
 
     return $api;

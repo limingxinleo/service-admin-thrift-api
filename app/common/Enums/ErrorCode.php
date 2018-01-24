@@ -89,6 +89,11 @@ class ErrorCode extends Enum
     public static $ENUM_SYSTEM_ROUTER_CAN_NOT_CHANGED = 2101;
 
     /**
+     * @Message('路由不存在')
+     */
+    public static $ENUM_ROUTER_NOT_EXIST = 2102;
+
+    /**
      * @Message('角色保存失败')
      */
     public static $ENUM_ROLE_ADD_FAIL = 2200;

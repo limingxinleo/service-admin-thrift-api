@@ -18,6 +18,8 @@ class RoleRoutersValidator extends Validator
         $this->add(
             [
                 'id',
+                'pageIndex',
+                'pageSize'
             ],
             new PresenceOf([
                 'message' => 'The :field is required'
