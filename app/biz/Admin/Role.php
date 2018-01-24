@@ -70,14 +70,14 @@ class Role extends Base
             $router = RouterModel::class;
             $roleRouter = RoleRouter::class;
             $query->innerJoin($router, "[$router].[id] = [$roleRouter].[router_id]");
-            $query->andWhere('name like :name: OR route like :route:', [
+            $query->andWhere("[$router].[name] like :name: OR [$router].[route] like :route:", [
                 'name' => "%" . $searchText . "%",
                 'route' => "%" . $searchText . "%",
             ]);
         }
 
-        $result = $query->execute();
-        return count($result);
+        $params = $query->getParams();
+        return RoleRouter::count($params);
     }
 
     /**
