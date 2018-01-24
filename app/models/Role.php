@@ -64,6 +64,33 @@ class Role extends Model
         parent::initialize();
     }
 
+    public function routers($pageIndex, $pageSize, $searchText)
+    {
+        $this->hasManyToMany(
+            'id',
+            RoleRouter::class,
+            'role_id',
+            'router_id',
+            Router::class,
+            'id',
+            [
+                'reusable' => true,
+                'alias' => 'routers',
+                'params' => [
+                    'condition' => '(router.name like :name: OR router.route like :route:)',
+                    'bind' => [
+                        'name' => '%' . $searchText . '%',
+                        'route' => '%' . $searchText . '%',
+                    ],
+                    'offset' => $pageIndex * $pageSize,
+                    'limit' => $pageSize
+                ]
+            ]
+        );
+
+        return $this->routers;
+    }
+
     /**
      * Allows to query a set of records that match the specified conditions
      *

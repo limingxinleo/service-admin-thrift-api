@@ -103,7 +103,7 @@ class Router
     {
         $params = [];
         $params['conditions'] = 'role_id = :roleId:';
-        $params['roleId'] = $roleId;
+        $params['bind']['roleId'] = $roleId;
 
         $count = RoleRouter::count($params);
 
