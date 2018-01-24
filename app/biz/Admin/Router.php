@@ -12,6 +12,7 @@ use App\Biz\BizException;
 use App\Common\Enums\ErrorCode;
 use App\Common\Enums\SystemCode;
 use App\Core\System;
+use App\Models\RoleRouter;
 use Xin\Traits\Common\InstanceTrait;
 use App\Models\Router as RouterModel;
 use App\Models\User as UserModel;
@@ -89,6 +90,43 @@ class Router
         }
 
         return $query->limit($pageSize, $pageSize * $pageIndex)->execute();
+    }
+
+    /**
+     * @desc   获取某角色下的路由 带分页
+     * @author limx
+     * @param       $roleId
+     * @param array $condition
+     * @return array
+     */
+    public function routesByRoleId($roleId, array $condition = [])
+    {
+        $params = [];
+        $params['conditions'] = 'role_id = :roleId:';
+        $params['roleId'] = $roleId;
+
+        $count = RoleRouter::count($params);
+
+        if ($count === 0) {
+            return [null, $count];
+        }
+
+        if (isset($condition['pageSize']) && $pageSize = $condition['pageSize']) {
+            $params['limit'] = $pageSize;
+            if (isset($condition['pageIndex']) && $pageIndex = $condition['pageIndex']) {
+                $params['offset'] = $pageSize * $pageSize;
+            }
+        }
+
+        $rel = RoleRouter::find($params);
+        if (empty($rel)) {
+            return [null, $count];
+        }
+
+        $routerIds = array_column($rel->toArray(), 'router_id');
+
+        $result = RouterModel::query()->inWhere('id', $routerIds)->execute();
+        return [$result, $count];
     }
 
     /**
