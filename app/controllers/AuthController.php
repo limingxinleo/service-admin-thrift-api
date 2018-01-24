@@ -12,6 +12,9 @@ use App\Biz\Auth\User;
 use App\Biz\BizException;
 use App\Common\Enums\ErrorCode;
 use App\Common\Enums\SystemCode;
+use App\Models\Role as RoleModel;
+use App\Utils\Log;
+use App\Utils\Redis;
 
 abstract class AuthController extends Controller
 {
@@ -33,8 +36,23 @@ abstract class AuthController extends Controller
 
         if ($user->type !== SystemCode::ADMIN_USER_SUPER_TYPE) {
             // 非超级管理员，判断管理员是否有权限访问
+            $uri = $this->request->getURI();
+            preg_match('/(.*)\?/', $uri, $res);
+            $uri = $res[1] ?? '/*';
 
-            throw new BizException(ErrorCode::$ENUM_ILLEGAL_REQUEST);
+            $pass = false;
+            /** @var RoleModel $role */
+            foreach ($user->roles as $role) {
+                $redisKey = sprintf(SystemCode::REDIS_KEY_ROLE_ROUTER_CACHE_KEY, $role->id);
+                if (Redis::sismember($redisKey, $uri)) {
+                    $pass = true;
+                    break;
+                }
+            }
+
+            if ($pass === false) {
+                throw new BizException(ErrorCode::$ENUM_ILLEGAL_REQUEST);
+            }
         }
     }
 
