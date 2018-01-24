@@ -20,6 +20,8 @@ $router->group(function () {
     $api->add('/user/info', 'App\\Controllers\\Admin\\User::info')->setName('管理员基本信息');
     $api->add('/user/list', 'App\\Controllers\\Admin\\User::list')->setName('管理员列表');
     $api->add('/user/save', 'App\\Controllers\\Admin\\User::save')->setName('保存管理员');
+    $api->add('/user/roles', 'App\\Controllers\\Admin\\User::roles')->setName('获取用户角色');
+    $api->add('/user/roles/update', 'App\\Controllers\\Admin\\User::updateRole')->setName('更新用户角色');
 
     $api->add('/router/update', 'App\\Controllers\\Admin\\Router::update')->setName('路由更新');
     $api->add('/router/list', 'App\\Controllers\\Admin\\Router::list')->setName('路由列表');

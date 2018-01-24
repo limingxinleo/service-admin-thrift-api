@@ -13,6 +13,8 @@ use App\Biz\BizException;
 use App\Common\Enums\ErrorCode;
 use App\Common\Enums\SystemCode;
 use App\Models\User as UserModel;
+use App\Models\Role as RoleModel;
+use App\Models\UserRole;
 
 class User extends Base
 {
@@ -29,6 +31,17 @@ class User extends Base
             'limit' => $pageSize,
             'offset' => $pageIndex * $pageSize
         ]);
+    }
+
+    /**
+     * @desc   获取用户基本信息
+     * @author limx
+     * @param $userId
+     * @return UserModel
+     */
+    public function info($userId)
+    {
+        return UserModel::findFirst($userId);
     }
 
     /**
@@ -63,6 +76,41 @@ class User extends Base
         }
 
         return $user->save();
+    }
+
+    /**
+     * @desc   更新用户角色
+     * @author limx
+     * @param $userId
+     * @param $roleId
+     * @return bool
+     */
+    public function updateRole($userId, $roleId)
+    {
+        $user = UserModel::findFirst($userId);
+        if (empty($user)) {
+            throw new BizException(ErrorCode::$ENUM_ADMIN_NOT_EXIST);
+        }
+
+        $role = RoleModel::findFirst($roleId);
+        if (empty($role)) {
+            throw new BizException(ErrorCode::$ENUM_ROLE_NOT_EXIST);
+        }
+
+        $rel = UserRole::findFirst([
+            'conditions' => 'user_id = ?0 AND role_id = ?1',
+            'bind' => [$userId, $roleId]
+        ]);
+
+        if ($rel) {
+            return $rel->delete();
+        }
+
+        $rel = new UserRole();
+        $rel->user_id = $userId;
+        $rel->role_id = $roleId;
+
+        return $rel->save();
     }
 
     /**

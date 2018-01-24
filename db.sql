@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.21)
 # Database: admin
-# Generation Time: 2018-01-24 02:44:05 +0000
+# Generation Time: 2018-01-24 08:27:47 +0000
 # ************************************************************
 
 
@@ -59,7 +59,7 @@ CREATE TABLE `role_router` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `ROLE_INDEX` (`role_id`),
+  UNIQUE KEY `ROLE_ROUTER_UNIQUE` (`role_id`,`router_id`),
   KEY `ROUTER_INDEX` (`router_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='角色权限表';
 

@@ -79,6 +79,16 @@ class ErrorCode extends Enum
     public static $ENUM_ADMIN_USERNAME_EXIST = 2001;
 
     /**
+     * @Message('管理员不存在')
+     */
+    public static $ENUM_ADMIN_NOT_EXIST = 2002;
+
+    /**
+     * @Message('管理员绑定角色失败')
+     */
+    public static $ENUM_ADMIN_BIND_ROLE_FAIL = 2003;
+
+    /**
      * @Message('路由保存失败')
      */
     public static $ENUM_ROUTER_ADD_FAIL = 2100;
