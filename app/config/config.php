@@ -143,9 +143,11 @@ return new Config(
             'viewsDir' => APP_PATH . '/views/',
 
             'cacheDir' => ROOT_PATH . '/storage/cache/',
+            'lockDir' => ROOT_PATH . '/storage/lock/',
             'logDir' => ROOT_PATH . '/storage/log/',
             'metaDataDir' => ROOT_PATH . '/storage/meta/',
             'migrationsDir' => ROOT_PATH . '/storage/migrations/',
+            'pidsDir' => ROOT_PATH . '/storage/pids/',
             'baseUri' => '/',
         ],
 
@@ -287,6 +289,7 @@ return new Config(
                 'view' => App\Core\Services\Mvc\View::class,
                 'dispatcher' => App\Core\Services\Mvc\Dispatcher::class,
                 'middleware' => App\Core\Services\Mvc\Middleware::class,
+                'request' => App\Core\Services\Mvc\Request::class,
             ],
         ],
 
