@@ -119,7 +119,7 @@ class RoleController extends AuthController
         }
 
         return Response::success([
-            'list' => $total,
+            'items' => $total,
             'total' => $count
         ]);
     }
